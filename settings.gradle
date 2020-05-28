@@ -1,0 +1,2 @@
+rootProject.name='LookLock'
+include ':app'
