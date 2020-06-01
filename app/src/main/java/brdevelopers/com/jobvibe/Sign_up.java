@@ -39,9 +39,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by End User on 27-03-2018.
- */
+
 
 public class Sign_up extends AppCompatActivity implements TextWatcher,View.OnClickListener{
 

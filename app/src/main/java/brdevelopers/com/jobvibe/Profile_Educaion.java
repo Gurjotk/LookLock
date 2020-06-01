@@ -28,9 +28,6 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Uchiha Itachi on 27-03-2018.
- */
 
 public class Profile_Educaion extends Fragment {
 
