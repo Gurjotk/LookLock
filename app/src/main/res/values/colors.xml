@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+   <!-- <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#03DAC5</color>-->
+    <color name="gray">#b6e7e5e7</color>
+    <color name="orange">#B3042379</color>
+    <color name="white">#ffffff</color>
+    <color name="bluehead">#2b78e4</color>
+    <color name="accent_material_light">#40c4ff</color>
+    <color name="black">#272822</color>
+    <color name="onbutton">#C71A42</color>
+    <color name="button">#009688</color>
+    <color name="joblabel">#FD6A00</color>
+    <color name="line">#37474f</color>
+    <color name="ok_button">#40c4ff</color>
+    <color name="yellow">#FEE161</color>
+    <color name="darkgrey">#3C4542</color>
+    <color name="lightgrey">#615D5E</color>
+    <color name="search">#a2ffffff</color>
+
+    <color name="color_log_in">#40c4ff</color>
+
+
+    <color name="colorPrimary">#40c4ff</color>
+    <color name="colorPrimaryDark">#40c4ff</color>
+    <color name="primary_light">#B2DFDB</color>
+    <color name="colorAccent">#FF5722</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFF</color>
+    <color name="divider">#BDBDBD</color>
+
 </resources>
