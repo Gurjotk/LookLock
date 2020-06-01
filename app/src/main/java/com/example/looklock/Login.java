@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +53,7 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        et_email = findViewById(R.id.ET_email);
+        et_email = findViewById(R.id.edi_email);
         et_password = findViewById(R.id.ET_password);
         tv_btnlogin = findViewById(R.id.TV_loginbutton);
         til_password = findViewById(R.id.TIL_password);
