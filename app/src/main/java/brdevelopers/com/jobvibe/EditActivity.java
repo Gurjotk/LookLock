@@ -74,17 +74,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private void loadProfilePic() {
 
         DBManager db=new DBManager(this);
-        byte[] byteimg=db.getImage(Home.canemail);
-        if(byteimg!=null){
-            Bitmap bitimg= BitmapFactory.decodeByteArray(byteimg, 0, byteimg.length);
-            try{
-                profileimg.setImageBitmap(bitimg);
-            }
-            catch (Exception ex)
-            {
-                Log.d("logcheck","exception "+ex);
-            }
-        }
+
     }
 
     //Permission menu for access gallery or camera
@@ -132,14 +122,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 
         byte[] profieimg=imageViewtoByte(profileimg);
-        DBManager db=new DBManager(this);
-        boolean bol=db.isImgExists(Home.canemail);
-        if(!bol){
-            db.insertImage(Home.canemail,profieimg);
-        }
-        else if(bol){
-            db.updateImage(Home.canemail,profieimg);
-        }
+
 
     }
 
