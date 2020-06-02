@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
     private int i_email = 0, i_password = 0;
 
 
-    private String saveLogin = "http://103.230.103.142/jobportalapp/job.asmx/CandidateLogin";
+   
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

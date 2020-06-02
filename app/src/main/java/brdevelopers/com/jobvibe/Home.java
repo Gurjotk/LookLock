@@ -54,7 +54,7 @@ public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
-    private TextView matched,recommended,viewed,saved,applied,tv_home,tv_activity,tv_notification,tv_empname,tv_empemail;
+    private TextView tv_home,tv_activity,tv_notification,tv_empname,tv_empemail;
     private ImageView iv_home,iv_activity,iv_notification,iv_profileImage;
     public static String canemail;
     public static String name,getdegree,getfos;

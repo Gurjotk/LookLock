@@ -47,7 +47,7 @@ import java.util.Map;
 
 public class Viewed_Fragment extends Fragment {
 
-    private String allJob = "http://103.230.103.142/jobportalapp/job.asmx/GetJobDetails";
+
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
 

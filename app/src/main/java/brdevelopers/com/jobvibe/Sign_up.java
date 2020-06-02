@@ -49,7 +49,7 @@ public class Sign_up extends AppCompatActivity implements TextWatcher,View.OnCli
     TextView tv_signup,tv_toLogin;
     private int i_password=0,i_cpassword=0,i_email=0;
 
-    private String getCandidateDetails="http://103.230.103.142/jobportalapp/job.asmx/GetCandidateDetails";
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -214,14 +214,14 @@ public class Sign_up extends AppCompatActivity implements TextWatcher,View.OnCli
                 }
         ){
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+          @Override
+           public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json; charset=UTF-8");
                 params.put("Authorization", "Basic c2VydmljZW1hbmR1OnNlcnZpY2VtYW5kdUAyMDIw");
                 return params;
             }
-            //here I want to post data to sever
+            //here I want to post data to server
         };
         requstQueue.add(jsonobj);
 
