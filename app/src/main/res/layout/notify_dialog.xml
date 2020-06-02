@@ -29,10 +29,10 @@
             android:id="@+id/TV_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thank You for Using JobVibe!"
-            android:textSize="@dimen/label"
+            android:text="Thank You for Using LookLock!"
             android:textColor="@color/bluehead"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/label"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TV_text"

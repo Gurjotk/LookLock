@@ -61,8 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/black"
-                android:text="Job Vibe is intended only to serve as a preliminary medium of contact and exchange of information for its users /members /visitors who have a bona fide intention to contact and/or be contacted for the purposes related to genuine existing job vacancies and for other career enhancement services." />
+                android:text="Look Lock is intended only to serve as a preliminary medium of contact and exchange of information for its users /members /visitors who have a bona fide intention to contact and/or be contacted for the purposes related to genuine existing job vacancies and for other career enhancement services."
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="match_parent"

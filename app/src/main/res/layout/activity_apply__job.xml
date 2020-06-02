@@ -135,9 +135,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
                         android:layout_toRightOf="@+id/TV_locationLabel"
-                        android:text="Kolkata"
-                        android:textSize="@dimen/headlabel"
+                        android:text="Montreal"
                         android:textColor="@color/darkgrey"
+                        android:textSize="@dimen/headlabel"
                         android:textStyle="bold" />
 
                     <TextView
@@ -296,8 +296,8 @@
                     android:layout_below="@id/TV_about"
                     android:layout_alignLeft="@+id/TV_about"
                     android:paddingBottom="5dp"
+                    android:text="Tactico is one of the most reputed compant in Canada."
                     android:textColor="@color/darkgrey"
-                    android:text="Wipro is one of the most reputed compant in India."
                     android:textSize="@dimen/headlabel"
                     android:textStyle="bold" />
                 <View
@@ -344,11 +344,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/TV_contactHeader"
-                    android:layout_toRightOf="@+id/TV_urlLabel"
                     android:layout_marginLeft="77dp"
-                    android:text="www.wipro.com"
-                    android:textSize="@dimen/headlabel"
+                    android:layout_toRightOf="@+id/TV_urlLabel"
+                    android:text="www.tactico.com"
                     android:textColor="@color/darkgrey"
+                    android:textSize="@dimen/headlabel"
                     android:textStyle="bold" />
 
                 <TextView
@@ -369,9 +369,9 @@
                     android:layout_below="@id/TV_url"
                     android:layout_alignLeft="@+id/TV_url"
                     android:paddingBottom="5dp"
-                    android:text="wiproindia@wipro.com"
-                    android:textSize="@dimen/headlabel"
+                    android:text="canada@tactico.com"
                     android:textColor="@color/darkgrey"
+                    android:textSize="@dimen/headlabel"
                     android:textStyle="bold" />
 
                 <View
