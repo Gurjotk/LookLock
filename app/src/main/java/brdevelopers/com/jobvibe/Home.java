@@ -54,17 +54,17 @@ public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
-    private TextView tv_home,tv_activity,tv_notification,tv_empname,tv_empemail;
-    private ImageView iv_home,iv_activity,iv_notification,iv_profileImage;
-    public static String canemail;
-    public static String name,getdegree,getfos;
-    private boolean onbackpressed=false;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private final int REQUEST_CODE_GALLERY=999;
-    private Toolbar toolbar;
-    private LinearLayout layoutHome,layoutActivity,layoutNotify;
-    public static LinearLayout layoutbottom;
+   private TextView matched,recommended,viewed,saved,applied,tv_home,tv_activity,tv_notification,tv_empname,tv_empemail;
+   private ImageView iv_home,iv_activity,iv_notification,iv_profileImage;
+   public static String canemail;
+   public static String name,getdegree,getfos;
+   private boolean onbackpressed=false;
+   private TabLayout tabLayout;
+   private ViewPager viewPager;
+   private final int REQUEST_CODE_GALLERY=999;
+   private Toolbar toolbar;
+   private LinearLayout layoutHome,layoutActivity,layoutNotify;
+   public static LinearLayout layoutbottom;
 
 
     @Override
@@ -154,7 +154,17 @@ public class Home extends AppCompatActivity
     private void loadProfilePic() {
 
         DBManager db=new DBManager(this);
-
+        byte[] byteimg=db.getImage(Home.canemail);
+        if(byteimg!=null){
+            Bitmap bitimg=BitmapFactory.decodeByteArray(byteimg, 0, byteimg.length);
+            try{
+                iv_profileImage.setImageBitmap(bitimg);
+            }
+            catch (Exception ex)
+            {
+                Log.d("logcheck","exception "+ex);
+            }
+        }
     }
 
     //Permission menu for access gallery or camera
@@ -203,7 +213,13 @@ public class Home extends AppCompatActivity
 
         byte[] profieimg=imageViewtoByte(iv_profileImage);
         DBManager db=new DBManager(this);
-
+        boolean bol=db.isImgExists(Home.canemail);
+        if(!bol){
+            db.insertImage(Home.canemail,profieimg);
+        }
+        else if(bol){
+            db.updateImage(Home.canemail,profieimg);
+        }
 
     }
 
@@ -222,7 +238,7 @@ public class Home extends AppCompatActivity
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
         viewAdapter.addFragment(new MatchedFragment(),"Matched");
-
+        viewAdapter.addFragment(new Recommended(),"Recommended");
         viewPager.setAdapter(viewAdapter);
     }
 
@@ -231,7 +247,7 @@ public class Home extends AppCompatActivity
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
         viewAdapter.addFragment(new Viewed_Fragment(),"Viewed");
         viewAdapter.addFragment(new Saved_Fragment(),"Saved");
-
+        viewAdapter.addFragment(new Applied_Fragment(),"Applied");
         viewPager.setAdapter(viewAdapter);
     }
 
@@ -249,7 +265,7 @@ public class Home extends AppCompatActivity
             Log.d("logcheck","drawer");
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if(!onbackpressed){
+       else if(!onbackpressed){
 
             View v=findViewById(android.R.id.content);
             Snackbar.make(v,"Press back again to exit "+Html.fromHtml("&#9995;"),Snackbar.LENGTH_SHORT).show();

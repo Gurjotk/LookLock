@@ -61,7 +61,8 @@ import java.util.Map;
  */
 public class NotificationFragment extends Fragment {
 
-
+    private List<JobActivity> arrayList=null;
+    private List<Job_details> listjob;
     private String allJob = "http://103.230.103.142/jobportalapp/job.asmx/GetJobDetails";
     private ProgressBar progressBar;
     private ImageView iv_nojob;
@@ -88,7 +89,34 @@ public class NotificationFragment extends Fragment {
         listView=view.findViewById(R.id.notifyjob);
         relativeNotify=view.findViewById(R.id.RL__notify);
         initAnimation();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DBManager dbupdate=new DBManager(getActivity());
 
+                boolean bol=dbupdate.updateNotificationView(listjob.get(position).getJbid(),Home.canemail,"1");
+                AlertDialog.Builder report=new AlertDialog.Builder(getActivity());
+                View reportView=getLayoutInflater().inflate(R.layout.notify_dialog,null);
+                report.setView(reportView);
+                TextView okay=(TextView) reportView.findViewById(R.id.TV_ok);
+                final AlertDialog dialog = report.create();
+
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Log.d("logcheck","Button is clicked");
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+                arrayList=new ArrayList<>();
+                arrayList=dbupdate.getNotificationData(Home.canemail);
+                checkAndProceed();
+            }
+        });
 
 
 
@@ -130,7 +158,7 @@ public class NotificationFragment extends Fragment {
         mRequestQueue.start();
 
         DBManager dbManager = new DBManager(getActivity());
-
+        arrayList = dbManager.getNotificationData(Home.canemail);
         checkAndProceed();
         return view;
     }
@@ -138,6 +166,20 @@ public class NotificationFragment extends Fragment {
             if (Util.isNetworkConnected(getActivity())) {
 
 
+                listjob = new ArrayList<>();
+                if (arrayList != null) {
+                    getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+                    iv_nojob.setVisibility(View.GONE);
+                    for (JobActivity jobActivity : arrayList) {
+                        loadNotifyJob(jobActivity.getJobid());
+                    }
+
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    iv_nojob.setVisibility(View.VISIBLE);
+                }
 
             } else {
                 Toast toast = new Toast(getActivity());
@@ -185,9 +227,15 @@ public class NotificationFragment extends Fragment {
                     String jtitle=jobobject.getString("jobtitle");
                     String jcname=jobobject.getString("cname");
 
+                    Job_details job_details=new Job_details();
+                    job_details.setJbid(jobid);
+                    job_details.setJbtitle(jtitle);
+                    job_details.setJbcompnayname(jcname);
 
 
+                    listjob.add(job_details);
 
+                    listView.setAdapter(new NotificationJob());
                     progressBar.setVisibility(View.GONE);
                     relativeNotify.setBackgroundColor(Color.argb(182,231,229,231));
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -227,6 +275,48 @@ public class NotificationFragment extends Fragment {
         mRequestQueue.add(stringRequest);
     }
 
+    public class NotificationJob extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return listjob.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inf=getLayoutInflater();
+            View v=inf.inflate(R.layout.notifyrow,parent,false);
+            TextView jtitle=v.findViewById(R.id.jobtitle);
+            TextView jcompany=v.findViewById(R.id.jobcompany);
+            LinearLayout linerjob_notify=v.findViewById(R.id.LL_jobnotify);
+
+
+            for(JobActivity jobActivity: arrayList){
+                if(jobActivity.getJobid().equals(listjob.get(position).getJbid()) && jobActivity.getViewedjob().equals("1")){
+                    linerjob_notify.setBackgroundColor(Color.WHITE);
+                }
+                else if(jobActivity.getJobid().equals(listjob.get(position).getJbid()) && jobActivity.getViewedjob().equals("0"))
+                    linerjob_notify.setBackgroundColor(Color.rgb(231, 229, 231));
+
+            }
+
+            jtitle.setText(listjob.get(position).getJbtitle());
+            jcompany.setText(listjob.get(position).getJbcompnayname());
+
+
+            return v;
+        }
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -242,7 +332,7 @@ public class NotificationFragment extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
                 DBManager dbManager = new DBManager(getActivity());
-
+                arrayList = dbManager.getNotificationData(Home.canemail);
                 checkAndProceed();
                 return true;
             default:

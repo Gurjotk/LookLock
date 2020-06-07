@@ -4,16 +4,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo1"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@drawable/jvtie"
         android:supportsRtl="true"
-        android:largeHeap="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewJob"></activity>
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
@@ -39,10 +40,12 @@
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Apply_Job" />
         <activity android:name=".EditActivity" />
         <activity android:name=".FAQ" />
         <activity android:name=".Terms" />
         <activity android:name=".AboutUs" />
+        <activity android:name=".AddJob" />
     </application>
 
 </manifest>

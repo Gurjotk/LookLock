@@ -29,22 +29,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:text="Bijoy Dutta"
                 android:gravity="center"
-                android:text="Gurjot"
-                android:textColor="@color/white"
                 android:textSize="@dimen/jobDetailLabel"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/TV_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:text="bijoy10dutta@gmail.com"
                 android:gravity="center"
-                android:text="gurjotkaur106255@gmail.com"
-                android:textColor="@color/white"
                 android:textSize="@dimen/label"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

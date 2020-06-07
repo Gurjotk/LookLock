@@ -86,7 +86,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/TV_backtoLogin"
+        android:id="@+id/backtologin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

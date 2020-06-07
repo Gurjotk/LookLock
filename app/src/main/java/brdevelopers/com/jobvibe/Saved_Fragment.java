@@ -47,12 +47,12 @@ import java.util.Map;
 public class Saved_Fragment extends Fragment {
 
 
-//    private List<JobActivity> arrayList=null;
-//    private List<Job_details> listjob;
+    private List<JobActivity> arrayList=null;
+    private List<Job_details> listjob;
     private String allJob = "http://103.230.103.142/jobportalapp/job.asmx/GetJobDetails";
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-//    private RecyclerAdapter recyclerAdapter;
+    private RecyclerAdapter recyclerAdapter;
     private ImageView iv_nojob;
     private RequestQueue mRequestQueue;
 
@@ -103,7 +103,7 @@ public class Saved_Fragment extends Fragment {
         });
 
         DBManager dbManager=new DBManager(getActivity());
-//        arrayList=dbManager.getSavedData(Home.canemail);
+        arrayList=dbManager.getSavedData(Home.canemail);
 
 
 // Instantiate the cache
@@ -118,20 +118,20 @@ public class Saved_Fragment extends Fragment {
 // Start the queue
         mRequestQueue.start();
 
-//        listjob=new ArrayList<>();
-//        if(arrayList!=null){
-//
-//            iv_nojob.setVisibility(View.GONE);
-//            for (JobActivity jobActivity : arrayList) {
-//                loadalViewedJob(jobActivity.getJobid());
-//            }
-//
-//
-//        }
-//        else {
-//            progressBar.setVisibility(View.GONE);
-//            iv_nojob.setVisibility(View.VISIBLE);
-//        }
+        listjob=new ArrayList<>();
+        if(arrayList!=null){
+
+            iv_nojob.setVisibility(View.GONE);
+            for (JobActivity jobActivity : arrayList) {
+                loadalViewedJob(jobActivity.getJobid());
+            }
+
+
+        }
+        else {
+            progressBar.setVisibility(View.GONE);
+            iv_nojob.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -186,7 +186,39 @@ public class Saved_Fragment extends Fragment {
                     String jemail=jobobject.getString("email");
 
 
+                    Job_details job_details=new Job_details();
+                    job_details.setJbid(jid);
+                    job_details.setJbtitle(jtitle);
+                    job_details.setJblocation(jlocation);
+                    job_details.setJbldapply(jldapply);
+                    job_details.setJbcompnayname(jcname);
+                    job_details.setJburl(jurl);
+                    job_details.setJbsalary(jsalary);
+                    job_details.setJbbca(jbca);
+                    job_details.setJbmca(jmca);
+                    job_details.setJbcse(jcse);
+                    job_details.setJbit(jit);
+                    job_details.setJbee(jee);
+                    job_details.setJbece(jece);
+                    job_details.setJbcivil(jcivil);
+                    job_details.setJbmba(jmba);
+                    job_details.setJbasp(jasp);
+                    job_details.setJbphp(jphp);
+                    job_details.setJbjava(jjava);
+                    job_details.setJbios(jios);
+                    job_details.setJbandroid(jandroid);
+                    job_details.setJbdbms(jdbms);
+                    job_details.setJbwrittentest(jwrittentest);
+                    job_details.setJbwalking(jwalkin);
+                    job_details.setJbonline(jonline);
+                    job_details.setJbdescription(jdescription);
+                    job_details.setJbcompanyprofile(jcompanyprofile);
+                    job_details.setJbemail(jemail);
 
+                    listjob.add(job_details);
+
+                    recyclerAdapter=new RecyclerAdapter(getActivity(),listjob);
+                    recyclerView.setAdapter(recyclerAdapter);
                     progressBar.setVisibility(View.GONE);
 
 
@@ -236,7 +268,21 @@ public class Saved_Fragment extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
                 DBManager dbManager=new DBManager(getActivity());
+                arrayList=dbManager.getSavedData(Home.canemail);
 
+                listjob=new ArrayList<>();
+                if(arrayList!=null){
+
+                    iv_nojob.setVisibility(View.GONE);
+                    for (JobActivity jobActivity : arrayList) {
+                        loadalViewedJob(jobActivity.getJobid());
+                    }
+
+                }
+                else {
+                    progressBar.setVisibility(View.GONE);
+                    iv_nojob.setVisibility(View.VISIBLE);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
