@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_master">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:padding="@dimen/_15sdp"
+        android:layout_weight="1"
+        android:background="@drawable/border_green"
+        android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="country"
+                android:ellipsize="end"
+                android:textSize="15sp"
+                android:maxLines="1"/>
+        <Button
+            android:id="@+id/jobbutton"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#FAF5F5"
+            android:background="@drawable/job_button"
+            android:text="Jobs"/>
+
+    </LinearLayout>
+</LinearLayout>

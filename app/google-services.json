@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1086414702079",
+    "firebase_url": "https://jobvibe-63850.firebaseio.com",
+    "project_id": "jobvibe-63850",
+    "storage_bucket": "jobvibe-63850.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086414702079:android:31fcaacf2151f8583993ca",
+        "android_client_info": {
+          "package_name": "brdevelopers.com.jobvibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086414702079-oisk94d0b8aap3ag948vq0sqg5s19c5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "brdevelopers.com.jobvibe",
+            "certificate_hash": "a76bbee110d21308d8fa246e51251e5603f17585"
+          }
+        },
+        {
+          "client_id": "1086414702079-r2tramf5c29ut3s5l66h0oqgmp4f7li1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ-zlRifpiYNooBxjofXf-wsif0qJvuf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086414702079-r2tramf5c29ut3s5l66h0oqgmp4f7li1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
