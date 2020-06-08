@@ -8,12 +8,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
+            android:orientation="vertical"
             android:paddingRight="20dp">
+            <TextView
+                android:id="@+id/TV_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:textSize="@dimen/pofileTV" />
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_below="@+id/TV_test"
 
+                android:ems="10"
+                android:inputType="number"
+                />
             <TextView
                 android:id="@+id/TV_email"
                 android:layout_width="wrap_content"
@@ -22,7 +38,7 @@
                 android:textSize="@dimen/pofileTV" />
 
             <EditText
-                android:id="@+id/ET_email"
+                android:id="@+id/personali_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TV_email"
@@ -34,7 +50,7 @@
                 android:id="@+id/TV_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_email"
+                android:layout_below="@+id/personali_email"
                 android:layout_marginTop="15dp"
                 android:text="@string/name"
                 android:textSize="@dimen/pofileTV"/>
@@ -72,18 +88,18 @@
                 android:text="@string/address"
                 android:textSize="@dimen/pofileTV"/>
             <EditText
-                android:id="@+id/ET_address"
+                android:id="@+id/ET_addressperonal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TV_address"
                 android:textSize="@dimen/pofileET"
-                android:inputType="textCapWords"/>
+                />
 
             <TextView
                 android:id="@+id/TV_pincode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_address"
+                android:layout_below="@+id/ET_addressperonal"
                 android:layout_marginTop="15dp"
                 android:text="@string/pin_code"
                 android:textSize="@dimen/pofileTV"/>
@@ -224,7 +240,7 @@
                     android:layout_marginBottom="20dp"
                     android:elevation="5dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 

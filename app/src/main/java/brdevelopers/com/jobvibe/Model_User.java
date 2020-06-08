@@ -17,6 +17,6 @@ public class Model_User {
 
     public String password;
 
-    public boolean isAdmin;
+    public String profileImage;
 
 }

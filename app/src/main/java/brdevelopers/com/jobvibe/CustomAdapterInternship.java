@@ -2,6 +2,7 @@ package brdevelopers.com.jobvibe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterInternship.MyViewHolder>{
 
@@ -31,12 +34,14 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
         TextView tv_country;
         TextView tv_headlines;
         Button jobbutton;
+        LinearLayout parent;
 
         MyViewHolder (View itemview)
         {
             super(itemview);
 
             this.tv_country=(TextView)itemview.findViewById(R.id.tv_country);
+            this.parent=itemview.findViewById(R.id.parent);
            this.jobbutton=(Button) itemview.findViewById(R.id.jobbutton);
         }
     }
@@ -57,7 +62,9 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
 
         TextView tv_country=holder.tv_country;
        Button jobbutton=holder.jobbutton;
-
+        Random rnd = new Random();
+        int currentColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        holder.parent.setBackgroundColor(currentColor);
 
         tv_country.setText(entityInternshipArrayList.get(position).country+"");
       //  tv_headlines.setText(entityInternshipArrayList.get(position).headlines+"");
@@ -67,6 +74,7 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
                     String ctx = entityInternshipArrayList.get(position).country;
                 Intent profile = new Intent(context,ViewJob.class);
                 profile.putExtra("InternName",ctx);
+                profile.putExtra("RootName","Internship");
                 context.startActivity(profile);
             }
         });

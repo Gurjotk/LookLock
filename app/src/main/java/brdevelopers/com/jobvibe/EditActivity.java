@@ -21,9 +21,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
+import javax.microedition.khronos.egl.EGLDisplay;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,6 +45,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public String name=Home.name;
     public String degree=Home.getdegree;
     public String fos=Home.getfos;
+    public StorageReference mStorageRef;
 
 
     @Override
@@ -48,9 +59,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         tv_name=findViewById(R.id.TV_name);
         tv_email=findViewById(R.id.TV_email);
 
-        tv_name.setText(name);
-        tv_email.setText(emailh);
+        tv_name.setText(SaveLoginUser.user.name);
+        tv_email.setText(SaveLoginUser.user.email);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         profileimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,47 +124,77 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         if(requestCode==REQUEST_CODE_GALLERY && resultCode==RESULT_OK && data!=null) {
 
+            Uri uri = data.getData();
+
+            Log.d("imagetag", String.valueOf(uri));
+
+
+            InputStream inputStream = null;
             try {
-                Uri uri = data.getData();
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                profileimg.setImageBitmap(bitmap);
-                addImgToDb(bitmap);
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
+                inputStream = getContentResolver().openInputStream(uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+
+            String imgname=SaveLoginUser.user.name;
+            final StorageReference riversRef = mStorageRef.child("images/"+imgname+".jpg");
+
+            riversRef.putFile(uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //Get a URL to the uploaded content
+                            //Uri downloadUrl = taskSnapshot.getDownloadURL();
+                            riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    final Uri downloadUrl = uri;
+                                    SaveLoginUser.user.profileImage=uri.toString();
+                                   // Log.d("firebaseUrl", String.valueOf(downloadUrl));
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                                    DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("profileImage");
+
+                                    databaseReference.child("Users").child(SaveLoginUser.user.id).child("profileImage").setValue(downloadUrl.toString())
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(EditActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(EditActivity.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                            // ...
+                        }
+                    });
+             profileimg.setImageBitmap(bitmap);
+
+            //addImgToDb(bitmap);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
 
 
-    //Adding image to database
-    private void addImgToDb(Bitmap bitmap) {
 
 
-        byte[] profieimg=imageViewtoByte(profileimg);
-        DBManager db=new DBManager(this);
-        boolean bol=db.isImgExists(Home.canemail);
-        if(!bol){
-            db.insertImage(Home.canemail,profieimg);
-        }
-        else if(bol){
-            db.updateImage(Home.canemail,profieimg);
-        }
-
-    }
 
 
-    //Converting image to byte
-    private byte[] imageViewtoByte(ImageView iv_profileImage) {
-
-        Bitmap bitmap=((BitmapDrawable)iv_profileImage.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,80,byteArrayOutputStream);
-        byte[] bytearray=byteArrayOutputStream.toByteArray();
-        return bytearray;
-    }
 
     @Override
     public void onClick(View view) {

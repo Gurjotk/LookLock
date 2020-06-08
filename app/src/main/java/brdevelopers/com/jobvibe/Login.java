@@ -159,17 +159,17 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                         if (userEmail.equals(user.email) && password.equals(user.password)) {
 
                             Toast.makeText(Login.this, "Successfully logged in as User", Toast.LENGTH_SHORT).show();
-
+                             SaveLoginUser.user=user;
                             Intent profile = new Intent(getApplicationContext(),Home.class);
                             startActivity(profile);
                             finish();
                         }
-                        else if(!userEmail.equals(user.email) && !password.equals(user.password)) {
-                            Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                        }
+
 
                     }
-
+                    if (SaveLoginUser.user == null) {
+                        Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                    }
 
 
 
@@ -206,17 +206,18 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                         Model_User user = snapshot.getValue(Model_User.class);
                         user.id = snapshot.getKey();
                         if (userEmail.equals(user.email) && password.equals(user.password)) {
+                            SaveLoginUser.user=user;
                             Toast.makeText(Login.this, "Successfully logged in as Admin", Toast.LENGTH_SHORT).show();
                             Intent profile = new Intent(Login.this, AddJob.class);
                             startActivity(profile);
                             finish();
                         }
-                        else if(!userEmail.equals(user.email) && !password.equals(user.password)) {
-                            Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                        }
+
                     }
 
-
+                    if (SaveLoginUser.user == null) {
+                        Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                    }
 
 
                 }

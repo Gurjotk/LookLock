@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/lib/brdevelopers.com.jobvibe"
     xmlns:style="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_log_in"
+    android:background="@drawable/loginbackground"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -54,7 +54,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/orangeborder_whiteback"
                     android:gravity="center"
-                    android:text="Admin"
+                    android:text="Employer"
                     android:onClick="selectAdmin"
                     android:textStyle="bold"
                     android:textColor="#141414"/>
@@ -86,7 +86,7 @@
                 android:layout_marginTop="110dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textPassword"
                 tools:layout_editor_absoluteX="84dp"
                 android:paddingLeft="@dimen/_10sdp"
                 android:hint="user Password"
@@ -104,7 +104,7 @@
                 android:inputType="text"
                 tools:layout_editor_absoluteX="84dp"
                 android:paddingLeft="@dimen/_10sdp"
-                android:hint="admin email"
+                android:hint="Employer email"
                 tools:layout_editor_absoluteY="53dp"
                 android:visibility="gone"/>
 
@@ -120,7 +120,7 @@
                 android:inputType="text"
                 tools:layout_editor_absoluteX="84dp"
                 android:paddingLeft="@dimen/_10sdp"
-                android:hint="admin password"
+                android:hint="Employer password"
                 tools:layout_editor_absoluteY="53dp"
                 android:visibility="gone"/>
 
@@ -161,7 +161,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Login as Admin"
+            android:text="Login as Employer"
             android:textColor="#FCF9F9"
             android:textSize="@dimen/label"
             android:textStyle="bold"

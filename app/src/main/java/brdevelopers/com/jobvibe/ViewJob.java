@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewJob extends AppCompatActivity {
+public class ViewJob extends AppCompatActivity  {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
 
@@ -29,7 +29,8 @@ public class ViewJob extends AppCompatActivity {
         setContentView(R.layout.activity_view_job);
 
         Intent startingIntent = getIntent();
-        String InternName = startingIntent.getStringExtra("InternName");
+        final String InternName = startingIntent.getStringExtra("InternName");
+        final String RootName = startingIntent.getStringExtra("RootName");
        // Toast.makeText(ViewJob.this, InternName, Toast.LENGTH_SHORT).show();
 
         recyclerView=(RecyclerView)findViewById(R.id.RV_IntenshipViewJob);
@@ -39,7 +40,7 @@ public class ViewJob extends AppCompatActivity {
 
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Jobs").child("Internship").child(InternName).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Jobs").child(RootName).child(InternName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
        //
@@ -50,12 +51,13 @@ public class ViewJob extends AppCompatActivity {
                     Model_View_Job user = snapshot.getValue(Model_View_Job.class);
                     user.id = snapshot.getKey();
                     Log.d("mytag", user.companyName);
-                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName));
+                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,RootName,InternName));
                 }
 
               //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));
                 CustomAdapterInternshipViewJob customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,ViewJob.this);
                 recyclerView.setAdapter(customAdapter);
+
             }
 
             @Override
@@ -66,19 +68,7 @@ public class ViewJob extends AppCompatActivity {
 
 
     }
-    public  void prepare_news(){
-
-        enityInternshipViewJobArrayList=new ArrayList<>();
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("React Developer","Kolkata","Now Mexian"));
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("Native Developer","INDIA","India Flag "));
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("Android Develper","CANADA","International"));
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("Expo Developer","USA","Now Mexian"));
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("Ios Developer","INDIA","India Flag"));
-        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("Ionic Developer","CANADA","International"));
 
 
-        CustomAdapterInternshipViewJob customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,ViewJob.this);
 
-        recyclerView.setAdapter(customAdapter);
-    }
 }

@@ -43,9 +43,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,14 +127,15 @@ public class Home extends AppCompatActivity
         tv_empemail=(TextView)headerView.findViewById(R.id.TV_profileEmail);
         iv_profileImage=headerView.findViewById(R.id.imageView);
 
-        iv_profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        String imguri=SaveLoginUser.user.profileImage;
 
-                ActivityCompat.requestPermissions(Home.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE_GALLERY);
+        String CheckImageValue=String.valueOf(imguri);
 
-            }
-        });
+        if(!CheckImageValue.equals("null")) {
+            Glide.with(this).load(imguri)
+
+                    .into(iv_profileImage);
+        }
 
         tv_empname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,8 +144,8 @@ public class Home extends AppCompatActivity
             }
         });
 
-        tv_empname.setText(name);
-        tv_empemail.setText(canemail);
+        tv_empname.setText(SaveLoginUser.user.name);
+        tv_empemail.setText(SaveLoginUser.user.email);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -148,104 +154,26 @@ public class Home extends AppCompatActivity
         iv_activity.setImageResource(R.drawable.ic_activity);
         iv_notification.setImageResource(R.drawable.ic_notification);
 
-        loadProfilePic();
-    }
-
-    private void loadProfilePic() {
-
-        DBManager db=new DBManager(this);
-        byte[] byteimg=db.getImage(Home.canemail);
-        if(byteimg!=null){
-            Bitmap bitimg=BitmapFactory.decodeByteArray(byteimg, 0, byteimg.length);
-            try{
-                iv_profileImage.setImageBitmap(bitimg);
-            }
-            catch (Exception ex)
-            {
-                Log.d("logcheck","exception "+ex);
-            }
-        }
-    }
-
-    //Permission menu for access gallery or camera
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        if(requestCode==REQUEST_CODE_GALLERY){
-            if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,REQUEST_CODE_GALLERY);
-            }
-            else{
-                Toast.makeText(this, "You don't have permission to access file!.", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    //Setting image to image View after permission granted
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if(requestCode==REQUEST_CODE_GALLERY && resultCode==RESULT_OK && data!=null) {
-
-            try {
-                Uri uri = data.getData();
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                iv_profileImage.setImageBitmap(bitmap);
-                addImgToDb(bitmap);
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+       // loadProfilePic();
     }
 
 
 
-    //Adding image to database
-    private void addImgToDb(Bitmap bitmap) {
 
 
-        byte[] profieimg=imageViewtoByte(iv_profileImage);
-        DBManager db=new DBManager(this);
-        boolean bol=db.isImgExists(Home.canemail);
-        if(!bol){
-            db.insertImage(Home.canemail,profieimg);
-        }
-        else if(bol){
-            db.updateImage(Home.canemail,profieimg);
-        }
-
-    }
-
-
-    //Converting image to byte
-    private byte[] imageViewtoByte(ImageView iv_profileImage) {
-
-        Bitmap bitmap=((BitmapDrawable)iv_profileImage.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,80,byteArrayOutputStream);
-        byte[] bytearray=byteArrayOutputStream.toByteArray();
-        return bytearray;
-    }
 
     private void setterViewPager(ViewPager viewPager) {
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
         viewAdapter.addFragment(new MatchedFragment(),"Matched");
-        viewAdapter.addFragment(new Recommended(),"Recommended");
+      //  viewAdapter.addFragment(new Recommended(),"Recommended");
         viewPager.setAdapter(viewAdapter);
     }
 
     private void setterViewPagerActivity(ViewPager viewPager) {
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
-        viewAdapter.addFragment(new Viewed_Fragment(),"Viewed");
+      //  viewAdapter.addFragment(new Viewed_Fragment(),"Viewed");
         viewAdapter.addFragment(new Saved_Fragment(),"Saved");
         viewAdapter.addFragment(new Applied_Fragment(),"Applied");
         viewPager.setAdapter(viewAdapter);

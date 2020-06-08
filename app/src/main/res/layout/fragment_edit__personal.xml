@@ -10,11 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingRight="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/TV_email"
@@ -24,10 +25,9 @@
                 android:textSize="@dimen/pofileTV" />
 
             <EditText
-                android:id="@+id/ET_email"
+                android:id="@+id/ET_email_personal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_email"
                 android:textSize="@dimen/pofileET"
                 android:inputType="textEmailAddress"
                 android:focusable="false"/>
@@ -36,15 +36,13 @@
                 android:id="@+id/TV_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_email"
                 android:layout_marginTop="15dp"
                 android:text="@string/name"
                 android:textSize="@dimen/pofileTV"/>
             <EditText
-                android:id="@+id/ET_name"
+                android:id="@+id/ET_name_personal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_name"
                 android:textSize="@dimen/pofileET"
                 android:inputType="textCapWords"/>
 
@@ -52,7 +50,6 @@
                 android:id="@+id/TV_mobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_name"
                 android:layout_marginTop="15dp"
                 android:text="@string/mobile"
                 android:textSize="@dimen/pofileTV"/>
@@ -60,7 +57,7 @@
                 android:id="@+id/ET_mobie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_mobile"
+
                 android:textSize="@dimen/pofileET"
                 android:inputType="phone"
                 android:maxLength="13"/>
@@ -69,7 +66,7 @@
                 android:id="@+id/TV_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_mobie"
+
                 android:layout_marginTop="15dp"
                 android:text="@string/address"
                 android:textSize="@dimen/pofileTV"/>
@@ -77,32 +74,48 @@
                 android:id="@+id/ET_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_address"
+
                 android:textSize="@dimen/pofileET"
                 android:inputType="textCapWords"/>
+
+            <TextView
+                android:id="@+id/TV_Experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="15dp"
+                android:text="Experience"
+                android:textSize="@dimen/pofileTV"/>
+            <EditText
+                android:id="@+id/ET_Experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/pofileET"
+                android:inputType="number"
+                android:maxLength="6"/>
 
             <TextView
                 android:id="@+id/TV_pincode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_address"
+
                 android:layout_marginTop="15dp"
-                android:text="@string/pin_code"
+                android:text="Postal Code"
                 android:textSize="@dimen/pofileTV"/>
             <EditText
                 android:id="@+id/ET_pincode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_pincode"
+
                 android:textSize="@dimen/pofileET"
-                android:inputType="number"
+                android:inputType="text"
                 android:maxLength="6"/>
 
             <TextView
                 android:id="@+id/TV_currentcity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_pincode"
                 android:layout_marginTop="15dp"
                 android:text="@string/current_city"
                 android:textSize="@dimen/pofileTV"/>
@@ -110,7 +123,7 @@
                 android:id="@+id/ET_currentcity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_currentcity"
+
                 android:textSize="@dimen/pofileET"
                 android:inputType="textCapWords"/>
 
@@ -118,7 +131,7 @@
                 android:id="@+id/TV_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ET_currentcity"
+
                 android:text="@string/gender"
                 android:layout_marginTop="15dp"/>
             <RadioGroup
@@ -126,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/TV_gender"
+
                 android:layout_marginTop="5dp">
                 <RadioButton
                     android:id="@+id/Radio_male"
@@ -146,14 +159,13 @@
                 android:id="@+id/TV_dob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Radio_gender"
                 android:layout_marginTop="15dp"
                 android:text="@string/date_of_birth"/>
             <EditText
                 android:id="@+id/ET_dob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_dob"
+
                 android:hint="dd/mm/yyyy"
                 android:paddingRight="7dp"
                 android:paddingLeft="7dp"
@@ -187,33 +199,30 @@
                 android:text="Degree"
                 android:textSize="@dimen/pofileTV"
                 android:layout_marginTop="15dp"/>
-            <EditText
-                android:id="@+id/ET_degree"
+            <Spinner
+                android:id="@+id/spinnerDegreedata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_degree"
-                android:focusable="false">
+                 />
 
-            </EditText>
+
 
             <TextView
                 android:id="@+id/TV_fos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ET_degree"
+                android:layout_below="@id/spinnerDegreedata"
                 android:text="Field of Study"
                 android:textSize="@dimen/pofileTV"
                 android:layout_marginTop="15dp"/>
-            <EditText
-                android:id="@+id/ET_fos"
+            <Spinner
+                android:id="@+id/spinnerFielfStudydata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TV_fos"
-                android:focusable="false">
-            </EditText>
+                />
 
             <TextView
-                android:id="@+id/TV_btnnext"
+                android:id="@+id/TV_btnnext_personal_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ET_fos"
@@ -229,7 +238,7 @@
                 android:layout_marginBottom="20dp"
                 android:elevation="5dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </ScrollView>
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.os.ConditionVariable;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Spinner;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -37,6 +39,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,13 +58,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-public class Edit_PersonalFragment extends Fragment implements View.OnClickListener,View.OnFocusChangeListener,TextWatcher {
-    private EditText et_email, et_dob,et_mobile,et_name,et_address,et_pincode,et_city,et_degree,et_fos;
+public class Edit_PersonalFragment extends Fragment implements View.OnClickListener,View.OnFocusChangeListener,TextWatcher,AdapterView.OnItemSelectedListener  {
+    private EditText et_email, et_dob,et_mobile,et_name,et_address,et_pincode,et_city,et_degree,et_fos,ET_Experience;
     private RadioButton radio_male,radio_female;
     private ImageView iv_dob;
-    private TextView tv_btnnext,tv_age;
+    private TextView TV_btnnext_personal_update,tv_age;
     private ProgressBar progressBar;
+    public String degreeValue,studyValue;
+    private Spinner degree,study;
 
+    String[] country = { "India", "USA", "China", "Japan", "Other"};
+    String [] degreevalues =
+            {"High School Diploma","AEC","DEC","Bachelor Degree","Master Degree","4-8 years"};
+
+    String [] studyvalue =
+            {"Agriculture","Accounting","Business Economics","Business Finance","Communication and Journalism","Computer and Information","Science","Educational Administration and supervision","Engineering","Geography and Cartography","Mechanic and Repair Technologies","Psychology","Dance","Design and Applied Arts"};
 
 
 
@@ -65,8 +82,8 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_edit__personal,container,false);
         //Binding view to references
-        et_email= view.findViewById(R.id.ET_email);
-        et_name= view.findViewById(R.id.ET_name);
+        et_email= view.findViewById(R.id.ET_email_personal);
+        et_name= view.findViewById(R.id.ET_name_personal);
         et_mobile=view.findViewById(R.id.ET_mobie);
         et_address=view.findViewById(R.id.ET_address);
         et_pincode= view.findViewById(R.id.ET_pincode);
@@ -74,33 +91,78 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
         et_dob=view.findViewById(R.id.ET_dob);
         radio_male=view.findViewById(R.id.Radio_male);
         radio_female=view.findViewById(R.id.Radio_female);
-        et_degree=view.findViewById(R.id.ET_degree);
+        degree=view.findViewById(R.id.spinnerDegreedata);
+        study=view.findViewById(R.id.spinnerFielfStudydata);
         et_fos=view.findViewById(R.id.ET_fos);
         iv_dob=view.findViewById(R.id.IV_dob);
-        tv_btnnext=view.findViewById(R.id.TV_btnnext);
+        TV_btnnext_personal_update=view.findViewById(R.id.TV_btnnext_personal_update);
         tv_age=view.findViewById(R.id.TV_age);
+        ET_Experience=view.findViewById(R.id.ET_Experience);
         progressBar=view.findViewById(R.id.progressbar);
 
         String email=Home.canemail;
 
-//        et_email.setText(email);
 
-        if (Util.isNetworkConnected(getActivity())) {
-            getCandidateDetail(email);
-        }
-        else{
-            Toast toast=new Toast(getActivity());
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM|Gravity.FILL_HORIZONTAL,0,0);
 
-            LayoutInflater inf=getActivity().getLayoutInflater();
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinnerDegreedata);
+        spinner.setOnItemSelectedListener(this);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, degreevalues);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
 
-            View layoutview=inf.inflate(R.layout.custom_toast,(ViewGroup)getActivity().findViewById(R.id.CustomToast_Parent));
-            TextView tf=layoutview.findViewById(R.id.CustomToast);
-            tf.setText("No Internet Connection "+ Html.fromHtml("&#9995;"));
-            toast.setView(layoutview);
-            toast.show();
-        }
+
+        Spinner spinner2 = (Spinner) view.findViewById(R.id.spinnerFielfStudydata);
+        spinner2.setOnItemSelectedListener(this);
+        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, studyvalue);
+        adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner2.setAdapter(adapter2);
+
+
+
+
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Users").child(SaveLoginUser.user.id).child("PersonalDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //
+                Model_personal_details value = dataSnapshot.getValue(Model_personal_details.class);
+                //Log.d("testtag", "Value is: " + value.companyName);
+
+                String dbavlue=String.valueOf(value);
+
+                if(dbavlue.equals("null")){
+                    Log.d("tesfassttag", "in false");
+                    return;
+                }
+                et_email.setText(value.email);
+                et_name.setText(value.name);
+                et_mobile.setText(value.mobile);
+                et_address.setText(value.address);
+                et_pincode.setText(value.pincode);
+                et_city.setText(value.currentCity);
+                et_dob.setText(value.dateOfBirth);
+                radio_male.setChecked(value.male);
+                radio_female.setChecked(value.female);
+                degree.setSelection(adapter.getPosition(value.degree));
+                // et_fos.setText(value.website);
+                study.setSelection(adapter2.getPosition(value.fieldStudy));
+                ET_Experience.setText(value.Experience);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Failed to load data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+       et_email.setText(SaveLoginUser.user.email);
+        et_name.setText(SaveLoginUser.user.name);
+
+
+      //  Toast.makeText(getActivity(), SaveLoginUser.user.email, Toast.LENGTH_SHORT).show();
+
+
 
         et_dob.setOnClickListener(this);        //Edit Text dob click
         iv_dob.setOnClickListener(this);        //Image View dob click
@@ -108,141 +170,23 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
         et_mobile.addTextChangedListener(this);//Edit Text mobile on textchange
 
 
-        tv_btnnext.setOnClickListener(this);
+        TV_btnnext_personal_update.setOnClickListener(this);
 
         return view;
 
     }
 
-    private void getCandidateDetail(final String email){
-
-        RequestQueue requstQueue = Volley.newRequestQueue(getActivity());
-        Map<String,String> hashMap = new HashMap<String, String>();
-        hashMap.put("sessionId",GlobalDetails.sessionId);
-
-        JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, GlobalDetails.mainUrl+"/Api/v1/User/Android/en/getupdateprofiledetails",new JSONObject(hashMap),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            JSONObject jsonObject=new JSONObject(response.toString());
-                            String success=jsonObject.getString("code");
-                            System.out.println(""+jsonObject);
-                            if(success.equals("S00"))
-                            {
-
-                                String email = jsonObject.getJSONObject("details").getJSONObject("user").getJSONObject("userDetail").getString("email");
-                                String name = jsonObject.getJSONObject("details").getJSONObject("user").getJSONObject("userDetail").getString("name");
-                                String mobile = jsonObject.getJSONObject("details").getJSONObject("user").getJSONObject("userDetail").getString("mobileNo");
-                                et_email.setText(email);
-                                et_name.setText(name);
-                                et_mobile.setText(mobile);
-                                et_address.setText(jsonObject.getJSONObject("details").getString("address"));
-                                et_pincode.setText(jsonObject.getJSONObject("details").getString("pincode"));
-                                et_city.setText(jsonObject.getJSONObject("details").getString("city"));
-                                et_dob.setText(jsonObject.getJSONObject("details").getString("dob"));
-                                et_degree.setText(jsonObject.getJSONObject("details").getString("degree"));
-                                et_fos.setText(jsonObject.getJSONObject("details").getString("computer"));
-
-                            }
-                            else{
-                                addupdatedetails();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("logcheck",""+e);
-                            progressBar.setVisibility(View.GONE);
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
-                        Log.d("logcheck",""+error);
-                    }
-                }
-        ){
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", "Basic c2VydmljZW1hbmR1OnNlcnZpY2VtYW5kdUAyMDIw");
-                return params;
-            }
-            //here I want to post data to sever
-        };
-        requstQueue.add(jsonobj);
-
-    }
 
 
-    public void addupdatedetails()
-    {
-        RequestQueue requstQueue = Volley.newRequestQueue(getActivity());
-        Map<String,String> hashMap = new HashMap<String, String>();
-        hashMap.put("sessionId",GlobalDetails.sessionId);
-        JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, GlobalDetails.mainUrl+"/Api/v1/User/Android/en/GetUserDetails",new JSONObject(hashMap),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
 
-                        try {
-                            JSONObject jsonObject=new JSONObject(response.toString());
-                            String success=jsonObject.getString("code");
-                            if(success.equals("S00"))
-                            {
 
-                                String email = jsonObject.getJSONObject("details").getString("email");
-                                String name = jsonObject.getJSONObject("details").getString("name");
-                                String mobile = jsonObject.getJSONObject("details").getString("mobileNo");
-                                et_email.setText(email);
-                                et_name.setText(name);
-                                et_mobile.setText(mobile);
-
-                            }
-                            else{
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("logcheck",""+e);
-                            progressBar.setVisibility(View.GONE);
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
-                        Log.d("logcheck",""+error);
-                    }
-                }
-        ){
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", "Basic c2VydmljZW1hbmR1OnNlcnZpY2VtYW5kdUAyMDIw");
-                return params;
-            }
-            //here I want to post data to sever
-        };
-
-        requstQueue.add(jsonobj);
-    }
 
     @Override
     public void onClick(View v) {
 
-        if(v.getId()==R.id.TV_btnnext)
+        if(v.getId()==R.id.TV_btnnext_personal_update)
         {
-            progressBar.setVisibility(View.VISIBLE);
+           // progressBar.setVisibility(View.VISIBLE);
 
             String email=et_email.getText().toString();
             String name=et_name.getText().toString();
@@ -251,33 +195,45 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
             String pincode=et_pincode.getText().toString();
             String city=et_city.getText().toString();
             String dob=et_dob.getText().toString();
-            String degree=et_degree.getText().toString();
-            String fos=et_fos.getText().toString();
-            String gender=null;
-            boolean bol=radio_male.isChecked();
-            if(bol)
-                gender="Male";
-            else
-                gender="Female";
+            String exper=ET_Experience.getText().toString();
+          //  String degree=et_degree.getText().toString();
+            //String fos=et_fos.getText().toString();
+            boolean bolMale=radio_male.isChecked();
+            boolean bolFemale=radio_female.isChecked();
 
+            final Model_personal_details user = new Model_personal_details();
+            user.email=email;
+            user.name=name;
+            user.mobile=mobile;
+            user.address=address;
+            user.pincode=pincode;
+            user.currentCity=city;
+            user.dateOfBirth=dob;
+            user.male=bolMale;
+            user.female=bolFemale;
+            user.Experience=exper;
+            user.fieldStudy=studyValue;
+            user.degree=degreeValue;
 
-            if(Util.isNetworkConnected(getActivity())) {
-                editcandidateDetails(email, name, mobile, address, pincode, city, dob, gender,degree,fos);
-            }
-            else{
-                Toast toast=new Toast(getActivity());
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM|Gravity.FILL_HORIZONTAL,0,0);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("PersonalDetails");
+           // String newUserKey = users.push().getKey();
 
-                LayoutInflater inf=getActivity().getLayoutInflater();
+            databaseReference.child("Users").child(SaveLoginUser.user.id).child("PersonalDetails").setValue(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
 
-                View layoutview=inf.inflate(R.layout.custom_toast,(ViewGroup)getActivity().findViewById(R.id.CustomToast_Parent));
-                TextView tf=layoutview.findViewById(R.id.CustomToast);
-                tf.setText("No Internet Connection "+ Html.fromHtml("&#9995;"));
-                toast.setView(layoutview);
-                toast.show();
-                progressBar.setVisibility(View.GONE);
-            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "Failed to Save", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
 
 
 
@@ -295,69 +251,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
 
     }
 
-    private void editcandidateDetails(final String email, final String name, final String mobile, final String address, final String pincode, final String city, final String dob, final String gender,final String degree,final String fos) {
 
-         RequestQueue requstQueue = Volley.newRequestQueue(getActivity());
-        Map<String,String> hashMap = new HashMap<String, String>();
-        hashMap.put("sessionId",GlobalDetails.sessionId);
-        hashMap.put("address",address);
-        hashMap.put("pincode",pincode);
-        hashMap.put("city",city);
-        hashMap.put("gender",gender);
-        hashMap.put("dob",dob);
-        hashMap.put("degree",degree);
-        hashMap.put("feildofstudy",fos);
-
-
-        JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, GlobalDetails.mainUrl+"/Api/v1/User/Android/en/updateprofileofjob",new JSONObject(hashMap),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            Toast toast=new Toast(getActivity());
-                            toast.setDuration(Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.BOTTOM|Gravity.FILL_HORIZONTAL,0,0);
-
-                            LayoutInflater inf=getActivity().getLayoutInflater();
-
-                            View layoutview=inf.inflate(R.layout.custom_toast,(ViewGroup)getActivity().findViewById(R.id.CustomToast_Parent));
-                            TextView tf=layoutview.findViewById(R.id.CustomToast);
-                            tf.setText("Details Updated Sucessfully "+ Html.fromHtml("&#x1f604;"));
-                            toast.setView(layoutview);
-                            toast.show();
-                            progressBar.setVisibility(View.GONE);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.d("logcheck",""+e);
-                            progressBar.setVisibility(View.GONE);
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("checklog"," "+error);
-                        Toast.makeText(getActivity(), ""+error, Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                    }
-                }
-        ){
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", "Basic c2VydmljZW1hbmR1OnNlcnZpY2VtYW5kdUAyMDIw");
-                return params;
-            }
-            //here I want to post data to sever
-        };
-
-        requstQueue.add(jsonobj);
-    }
 
 
     private void dateOfBirth() {
@@ -422,20 +316,29 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
-
-        String phoneno=et_mobile.getText().toString();
-
-        if(phoneno.length()==1) {
-            s.replace(0, phoneno.length(),"+91"+phoneno);
-        }
-        else if(phoneno.length()==3)
-        {
-            s.replace(0,phoneno.length(),"");
-        }
+    public void afterTextChanged(Editable editable) {
 
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Spinner spin = (Spinner)adapterView;
+       // Toast.makeText(getActivity(), "outside", Toast.LENGTH_SHORT).show();
+        Spinner spin2 = (Spinner)adapterView;
+        if(spin.getId() == R.id.spinnerDegreedata) {
+            degreeValue = degreevalues[i].toString();
+          //  Toast.makeText(getActivity(), "igndg", Toast.LENGTH_SHORT).show();
+            //int position=i;
+           // degreeValue=position;
+        }
+        if(spin2.getId()==R.id.spinnerFielfStudydata){
+            studyValue = studyvalue[i].toString();
+        }
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

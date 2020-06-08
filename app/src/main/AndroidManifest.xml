@@ -14,7 +14,8 @@
         android:roundIcon="@drawable/jvtie"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewJob"></activity>
+        <activity android:name=".JobSuccess"></activity>
+        <activity android:name=".ViewJob" />
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">

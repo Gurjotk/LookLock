@@ -103,14 +103,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             jobtitle=itemView.findViewById(R.id.TV_jobtitle);
             jobcompany=itemView.findViewById(R.id.TV_companyname);
             joblocation=itemView.findViewById(R.id.TV_location);
-            applybtn=itemView.findViewById(R.id.TV_applybtn);
+//            applybtn=itemView.findViewById(R.id.TV_applybtn);
 
-            if(apply==1){
+           /* if(apply==1){
 
                 applybtn.setVisibility(View.GONE);
-            }
+            }*/
 
-            applybtn.setOnClickListener(new View.OnClickListener() {
+        /*    applybtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder report=new AlertDialog.Builder(context);
@@ -147,7 +147,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     });
                     report.show();
                 }
-            });
+            });*/
         }
 
 

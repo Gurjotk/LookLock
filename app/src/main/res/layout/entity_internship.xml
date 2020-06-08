@@ -5,13 +5,20 @@
     android:id="@+id/ll_master">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_80sdp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:padding="@dimen/_15sdp"
         android:layout_weight="1"
+        android:id="@+id/parent"
         android:background="@drawable/border_green"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_touch_app_white"
+            />
 
 
             <TextView
@@ -20,9 +27,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="country"
-                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textColor="#F7F4F4"
                 android:textSize="15sp"
-                android:maxLines="1"/>
+                />
         <Button
             android:id="@+id/jobbutton"
             android:layout_width="@dimen/_40sdp"

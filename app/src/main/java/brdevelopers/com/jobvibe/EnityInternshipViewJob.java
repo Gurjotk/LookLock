@@ -5,10 +5,43 @@ public class EnityInternshipViewJob {
     String Location;
     String CompanyName;
 
-    public EnityInternshipViewJob(String jobTitle, String location, String companyName) {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    String id;
+
+    public String getRootName() {
+        return rootName;
+    }
+
+    public void setRootName(String rootName) {
+        this.rootName = rootName;
+    }
+
+    public String getInternName() {
+        return interName;
+    }
+
+    public void setInternName(String internName) {
+        this.interName = internName;
+    }
+
+    String rootName;
+    String interName;
+
+    public EnityInternshipViewJob(String jobTitle, String location, String companyName, String Id,String RootName,String InterName) {
         JobTitle = jobTitle;
         Location = location;
         CompanyName = companyName;
+        id = Id;
+        rootName=RootName;
+        interName=InterName;
     }
 
 

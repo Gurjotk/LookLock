@@ -94,7 +94,7 @@
             android:id="@+id/TV_editEducation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Educational Details"
+            android:text="Qualification Details"
             android:layout_weight="1"
             android:textSize="@dimen/headlabel"
             android:layout_toRightOf="@+id/TV_personal"
