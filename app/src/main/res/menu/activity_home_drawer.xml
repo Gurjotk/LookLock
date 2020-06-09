@@ -22,10 +22,10 @@
             android:title="Report a Problem"
             android:iconTint="@color/white"/>
 
-        <item
+       <!-- <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_share"
-            android:title="Share" />
+            android:title="Share" />-->
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"

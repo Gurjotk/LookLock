@@ -25,4 +25,8 @@ public class Model_education_details {
 
 
 
+    public String experineceDesignationSecond;
+    public String experinecPeriodSecond;
+    public String experineceSkillsSecond;
+
 }

@@ -9,12 +9,15 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,10 +50,12 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
     private EditText schoolBoard,schoolSchool,schoolYear,schoolpercent;
     private EditText universityBoard,universityUniversity,universityYear,universityPercentage;
     private EditText experineceDesignation,experinecPeriod,experineceSkills;
+    private EditText experineceDesignationSecond,experinecPeriodSecond,experineceSkillsSecond;
     private TextView tv_btnnext;
+    private ImageView add_exp;
     private ProgressBar progressBar;
 
-
+private LinearLayout LL_experinecesec;
 
 
     @Override
@@ -71,8 +76,16 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
         experinecPeriod=view.findViewById(R.id.ET_Period);
         experineceSkills=view.findViewById(R.id.pp_skills);
 
+        experineceDesignationSecond=view.findViewById(R.id.ET_Designation_experinecesec);
+        experinecPeriodSecond=view.findViewById(R.id.ET_Period_experinecesec);
+        experineceSkillsSecond=view.findViewById(R.id.pp_skills_experinecesec);
+
+
 
         tv_btnnext=view.findViewById(R.id.TV_btnnext);
+        add_exp=view.findViewById(R.id.plus_experience);
+        LL_experinecesec=view.findViewById(R.id.LL_experinecesec);
+        add_exp.setOnClickListener(this);
         tv_btnnext.setOnClickListener(this);
 
 
@@ -104,6 +117,19 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
                 experineceDesignation.setText(value.experineceDesignation);
                 experinecPeriod.setText(value.experinecPeriod);
                 experineceSkills.setText(value.experineceSkills);
+
+                experineceDesignationSecond.setText(value.experineceDesignationSecond);
+                experinecPeriodSecond.setText(value.experinecPeriodSecond);
+                experineceSkillsSecond.setText(value.experineceSkillsSecond);
+
+                String checkSecondDes=String.valueOf((value.experineceDesignationSecond));
+                Boolean valval=TextUtils.isEmpty(checkSecondDes);
+                Log.d("tagrtbh", "onDataChange: "+valval);
+                if(!TextUtils.isEmpty(checkSecondDes)&& !checkSecondDes.equals("null") ){
+                    LL_experinecesec.setVisibility(View.VISIBLE);
+
+
+                }
 
             }
 
@@ -145,6 +171,12 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
             String e_period=experinecPeriod.getText().toString();
             String e_skills=experineceSkills.getText().toString();
 
+            String e_exper_sec=experineceDesignationSecond.getText().toString();
+            String e_period_sec=experinecPeriodSecond.getText().toString();
+            String e_skills_sec=experineceSkillsSecond.getText().toString();
+
+
+
 
             final Model_education_details user = new Model_education_details();
             user.schoolBoard = s_board;
@@ -160,6 +192,10 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
             user.experineceDesignation=e_exper;
             user.experinecPeriod=e_period;
             user.experineceSkills=e_skills;
+
+            user.experineceDesignationSecond=e_exper_sec;
+            user.experinecPeriodSecond=e_period_sec;
+            user.experineceSkillsSecond=e_skills_sec;
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("QualificationDetails");
@@ -177,11 +213,20 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
+
                         }
                     });
 
 
 
+
+        }
+        else  if(v.getId()==R.id.plus_experience){
+            if(LL_experinecesec.getVisibility() == View.VISIBLE) {
+                Toast.makeText(getActivity(), "You can't add more then 2 experience", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            LL_experinecesec.setVisibility(View.VISIBLE);
 
         }
 

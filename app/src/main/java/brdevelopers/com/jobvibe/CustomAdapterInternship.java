@@ -31,7 +31,7 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
     {
 
 
-        TextView tv_country;
+        TextView tv_country,tv_company;
         TextView tv_headlines;
         Button jobbutton;
         LinearLayout parent;
@@ -41,8 +41,8 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
             super(itemview);
 
             this.tv_country=(TextView)itemview.findViewById(R.id.tv_country);
-            this.parent=itemview.findViewById(R.id.parent);
-           this.jobbutton=(Button) itemview.findViewById(R.id.jobbutton);
+            this.tv_company=(TextView)itemview.findViewById(R.id.tv_companyNamerec);
+//           this.jobbutton=(Button) itemview.findViewById(R.id.jobbutton);
         }
     }
 
@@ -61,14 +61,14 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         TextView tv_country=holder.tv_country;
+        TextView tv_companyName=holder.tv_company;
        Button jobbutton=holder.jobbutton;
-        Random rnd = new Random();
-        int currentColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        holder.parent.setBackgroundColor(currentColor);
+
 
         tv_country.setText(entityInternshipArrayList.get(position).country+"");
+        tv_companyName.setText(entityInternshipArrayList.get(position).companyName+"");
       //  tv_headlines.setText(entityInternshipArrayList.get(position).headlines+"");
-        holder.jobbutton.setOnClickListener(new View.OnClickListener() {
+        holder.tv_country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     String ctx = entityInternshipArrayList.get(position).country;

@@ -30,6 +30,7 @@ public class AddJob extends AppCompatActivity implements TextWatcher,View.OnClic
     private EditText category,city,jobTitle,designation,description,salary,companyName,website,type;
     String[] InternShip = { "Graphic Designer", "Android Developer", "Web Developer", "Technician", "Accountant"};
     String[] TypeData={"Internship","Job Category"};
+    List<String> list = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,14 +155,14 @@ public class AddJob extends AppCompatActivity implements TextWatcher,View.OnClic
         Spinner spin = (Spinner)adapterView;
         Spinner spin2 = (Spinner)adapterView;
         if(spin.getId() == R.id.et_category) {
-            InternValue = InternShip[i].toString();
+            InternValue = list.get(i).toString();
 
         }
          if(spin2.getId() == R.id.et_type){
          TypeValue=TypeData[i].toString();
          if(TypeValue.equals("Internship")){
-             List<String> list = new ArrayList<String>();
 
+               list.clear();
              list.add("Graphic Designer");
              list.add("Android Developer");
              list.add("Web Developer");
@@ -177,7 +178,8 @@ public class AddJob extends AppCompatActivity implements TextWatcher,View.OnClic
              spincat.setAdapter(aa);
          }
          else if(TypeValue.equals("Job Category")){
-             List<String> list = new ArrayList<String>();
+
+             list.clear();
              list.add("General Labour");
              list.add("Graphic Designer");
              list.add("Content Writter");

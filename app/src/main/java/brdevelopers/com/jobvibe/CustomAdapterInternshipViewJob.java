@@ -17,10 +17,12 @@ import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CustomAdapterInternshipViewJob extends RecyclerView.Adapter<CustomAdapterInternshipViewJob.MyViewHolder>{
 
     ArrayList<EnityInternshipViewJob> enityInternshipViewJobArrayList;
+    private ArrayList<EnityInternshipViewJob> arraylist;
     Context context;
     //declare interface
 
@@ -29,6 +31,8 @@ public class CustomAdapterInternshipViewJob extends RecyclerView.Adapter<CustomA
         this.enityInternshipViewJobArrayList = enityInternshipViewJobArrayList;
         this.context = context;
     }
+
+
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder
     {
@@ -98,7 +102,21 @@ public class CustomAdapterInternshipViewJob extends RecyclerView.Adapter<CustomA
        // Glide.with(context).load(entityNewsArrayList.get(position).thumb).into(img_thumb);
 
     }
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        enityInternshipViewJobArrayList.clear();
+        if (charText.length() == 0) {
+            enityInternshipViewJobArrayList.addAll(arraylist);
+        } else {
+            for (EnityInternshipViewJob wp : arraylist) {
+                if (wp.getJobTitle().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    enityInternshipViewJobArrayList.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
 
+    }
 
     @Override
     public int getItemCount() {

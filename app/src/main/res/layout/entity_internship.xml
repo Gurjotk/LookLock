@@ -5,7 +5,7 @@
     android:id="@+id/ll_master">
 
     <LinearLayout
-        android:layout_width="@dimen/_80sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:padding="@dimen/_15sdp"
@@ -13,35 +13,35 @@
         android:id="@+id/parent"
         android:background="@drawable/border_green"
         android:orientation="vertical">
+
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_touch_app_white"
-            />
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_gamepad_white" />
 
 
             <TextView
                 android:id="@+id/tv_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="country"
                 android:textStyle="bold"
                 android:textColor="#F7F4F4"
                 android:textSize="15sp"
                 />
-        <Button
-            android:id="@+id/jobbutton"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:textAllCaps="false"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#FAF5F5"
-            android:background="@drawable/job_button"
-            android:text="Jobs"/>
+        <TextView
+            android:id="@+id/tv_companyNamerec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:text="compnay"
+            android:textColor="#D3D0D0"
+            android:textSize="8sp"
+            />
+
 
     </LinearLayout>
 </LinearLayout>

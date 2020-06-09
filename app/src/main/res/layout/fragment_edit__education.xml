@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="university/board"
+                    android:text="Degree"
                     android:layout_marginTop="10dp"
                     android:textSize="@dimen/pofileTV"/>
                 <EditText
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="University"
+                    android:text="University Name"
                     android:textSize="@dimen/pofileTV"
                     android:layout_marginTop="10dp"/>
 
@@ -206,7 +206,11 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
                 <TextView
                     android:id="@+id/TV_curedu"
                     android:layout_width="wrap_content"
@@ -215,7 +219,14 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/headlabel"
                     android:textColor="#2b78e4"/>
-
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:id="@+id/plus_experience"
+                    android:maxHeight="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_140sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_circle_blue"/>
+</LinearLayout>
                 <TextView
                     android:id="@+id/TV_university"
                     android:layout_width="wrap_content"
@@ -260,6 +271,75 @@
 
                 <EditText
                     android:id="@+id/pp_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="text"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/LL_experinecesec"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/TV_experinecesec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Another Experience"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/headlabel"
+                    android:textColor="#2b78e4"/>
+
+                <TextView
+                    android:id="@+id/TV_university_experinecesec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Designation"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/pofileTV"/>
+                <EditText
+                    android:id="@+id/ET_Designation_experinecesec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="textCapWords"/>
+
+                <TextView
+                    android:id="@+id/TV_college_experinecesec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Period"
+                    android:textSize="@dimen/pofileTV"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/ET_Period_experinecesec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="textCapWords"/>
+
+                <TextView
+                    android:id="@+id/TV_cyoc_experinecesec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Skills"
+                    android:textSize="@dimen/pofileTV"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/pp_skills_experinecesec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

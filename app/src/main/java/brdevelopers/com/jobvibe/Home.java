@@ -79,15 +79,15 @@ public class Home extends AppCompatActivity
 
         iv_home=findViewById(R.id.IV_home);
         iv_activity=findViewById(R.id.IV_activity);
-        iv_notification=findViewById(R.id.IV_notification);
+//        iv_notification=findViewById(R.id.IV_notification);
         tv_home=findViewById(R.id.TV_home);
         tv_activity=findViewById(R.id.TV_activity);
-        tv_notification=findViewById(R.id.TV_notification);
+  //      tv_notification=findViewById(R.id.TV_notification);
         tabLayout=findViewById(R.id.TL_tab);
         viewPager=findViewById(R.id.VP_view);
         layoutHome=findViewById(R.id.layoutHome);
         layoutActivity=findViewById(R.id.layoutActivity);
-        layoutNotify=findViewById(R.id.layoutNotification);
+    //    layoutNotify=findViewById(R.id.layoutNotification);
         layoutbottom=findViewById(R.id.RL_buttons);
 
 
@@ -100,13 +100,13 @@ public class Home extends AppCompatActivity
 
         iv_home.setOnClickListener(this);
         iv_activity.setOnClickListener(this);
-        iv_notification.setOnClickListener(this);
+//        iv_notification.setOnClickListener(this);
         tv_home.setOnClickListener(this);
         tv_activity.setOnClickListener(this);
-        tv_notification.setOnClickListener(this);
+//        tv_notification.setOnClickListener(this);
         layoutHome.setOnClickListener(this);
         layoutActivity.setOnClickListener(this);
-        layoutNotify.setOnClickListener(this);
+//        layoutNotify.setOnClickListener(this);
 
         canemail=getIntent().getStringExtra("emailid");
         name=getIntent().getStringExtra("name");
@@ -152,7 +152,7 @@ public class Home extends AppCompatActivity
         iv_home.setImageResource(R.drawable.ic_onhome);
         tv_home.setVisibility(View.VISIBLE);
         iv_activity.setImageResource(R.drawable.ic_activity);
-        iv_notification.setImageResource(R.drawable.ic_notification);
+       // iv_notification.setImageResource(R.drawable.ic_notification);
 
        // loadProfilePic();
     }
@@ -264,7 +264,7 @@ public class Home extends AppCompatActivity
             report.show();
 
 
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
 //            Intent share=new Intent(Intent.ACTION_SEND);
 //            share.setType("text/plain");
@@ -275,7 +275,7 @@ public class Home extends AppCompatActivity
 //            share.putExtra(Intent.EXTRA_TEXT,"https://drive.google.com/file/d/1qFcvVtGTXOYAr2CCbauyxG9hJUvATyej/view?usp=sharing");
 //            startActivity(Intent.createChooser(share,"Share Using"));
 
-        }
+        }*/
         else if (id == R.id.nav_about) {
             Intent intent=new Intent(Home.this,AboutUs.class);
             startActivity(intent);
@@ -310,9 +310,9 @@ public class Home extends AppCompatActivity
             iv_home.setImageResource(R.drawable.ic_onhome);
             tv_home.setVisibility(View.VISIBLE);
             tv_activity.setVisibility(View.GONE);
-            tv_notification.setVisibility(View.GONE);
+           // tv_notification.setVisibility(View.GONE);
             iv_activity.setImageResource(R.drawable.ic_activity);
-            iv_notification.setImageResource(R.drawable.ic_notification);
+          //  iv_notification.setImageResource(R.drawable.ic_notification);
 
             toolbar.setTitle(R.string.title_activity_home);
 
@@ -323,10 +323,10 @@ public class Home extends AppCompatActivity
         } else if (v.getId()==R.id.IV_activity || v.getId()==R.id.TV_activity ||  v.getId()==R.id.layoutActivity) {
             iv_activity.setImageResource(R.drawable.ic_onactivity);
             tv_activity.setVisibility(View.VISIBLE);
-            tv_notification.setVisibility(View.GONE);
+          //  tv_notification.setVisibility(View.GONE);
             tv_home.setVisibility(View.GONE);
             iv_home.setImageResource(R.drawable.ic_home);
-            iv_notification.setImageResource(R.drawable.ic_notification);
+           // iv_notification.setImageResource(R.drawable.ic_notification);
 
             toolbar.setTitle(R.string.title_activity_activity);
 
@@ -335,7 +335,7 @@ public class Home extends AppCompatActivity
             setterViewPagerActivity(viewPager);
 
 
-        } else if (v.getId()==R.id.IV_notification || v.getId()==R.id.TV_notification || v.getId()==R.id.layoutNotification) {
+        }/* else if (v.getId()==R.id.IV_notification || v.getId()==R.id.TV_notification || v.getId()==R.id.layoutNotification) {
             iv_notification.setImageResource(R.drawable.ic_onnotification);
             tv_notification.setVisibility(View.VISIBLE);
             tv_home.setVisibility(View.GONE);
@@ -348,7 +348,7 @@ public class Home extends AppCompatActivity
             tabLayout.setVisibility(View.GONE);
             setterViewPagerNotification(viewPager);
 
-        }
+        }*/
 
 
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,10 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewJob extends AppCompatActivity  {
+public class ViewJob extends AppCompatActivity implements SearchView.OnQueryTextListener {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
-
+    SearchView editsearch;
+    CustomAdapterInternshipViewJob customAdapter;
     ArrayList<EnityInternshipViewJob> enityInternshipViewJobArrayList;
 
     @Override
@@ -32,7 +34,8 @@ public class ViewJob extends AppCompatActivity  {
         final String InternName = startingIntent.getStringExtra("InternName");
         final String RootName = startingIntent.getStringExtra("RootName");
        // Toast.makeText(ViewJob.this, InternName, Toast.LENGTH_SHORT).show();
-
+        editsearch = (SearchView) findViewById(R.id.search);
+        editsearch.setOnQueryTextListener(this);
         recyclerView=(RecyclerView)findViewById(R.id.RV_IntenshipViewJob);
         layoutManager=new LinearLayoutManager( this);
         recyclerView.setLayoutManager(layoutManager);
@@ -55,7 +58,7 @@ public class ViewJob extends AppCompatActivity  {
                 }
 
               //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));
-                CustomAdapterInternshipViewJob customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,ViewJob.this);
+                 customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,ViewJob.this);
                 recyclerView.setAdapter(customAdapter);
 
             }
@@ -70,5 +73,15 @@ public class ViewJob extends AppCompatActivity  {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String s) {
+        String text = s;
+        customAdapter.filter(text);
+        return false;
+    }
 }

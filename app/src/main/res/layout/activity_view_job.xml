@@ -7,7 +7,14 @@
     android:orientation="vertical"
     android:background="@color/gray"
     android:id="@+id/matchedRoot">
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false">
 
+        <requestFocus />
+    </SearchView>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RV_IntenshipViewJob"
         android:layout_width="match_parent"

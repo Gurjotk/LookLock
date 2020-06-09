@@ -60,8 +60,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MatchedFragment extends Fragment  {
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager,layoutManager2;
+    RecyclerView recyclerView,recyclerView2;
     ArrayList<EntityInternship> EntityInternshipArrayList;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -110,22 +110,30 @@ public class MatchedFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.matched_fragment, container, false);
+
         recyclerView=(RecyclerView) view.findViewById(R.id.RV_Intenship);
         layoutManager=new LinearLayoutManager( getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         prepare_news();
+
+        recyclerView2=(RecyclerView) view.findViewById(R.id.RV_JobCategory);
+        layoutManager2=new LinearLayoutManager( getActivity(),LinearLayoutManager.VERTICAL,false);
+        recyclerView2.setLayoutManager(layoutManager2);
+        prepare_news2();
+
+
         return  view;
     }
 
     public  void prepare_news(){
 
         EntityInternshipArrayList=new ArrayList<>();
-        EntityInternshipArrayList.add(new EntityInternship("Android Developer"));
-        EntityInternshipArrayList.add(new EntityInternship("Accountant"));
-        EntityInternshipArrayList.add(new EntityInternship("Technician"));
+        EntityInternshipArrayList.add(new EntityInternship("Android Developer","Mobile"));
+        EntityInternshipArrayList.add(new EntityInternship("Accountant","Admin"));
+        EntityInternshipArrayList.add(new EntityInternship("Technician","Tech"));
+        EntityInternshipArrayList.add(new EntityInternship("Web Developer","Full Stack"));
+        EntityInternshipArrayList.add(new EntityInternship("Graphic Designer","Animation"));
 
-        EntityInternshipArrayList.add(new EntityInternship("Web Developer"));
-        EntityInternshipArrayList.add(new EntityInternship("Graphic Designer"));
 //        EntityInternshipArrayList.add(new EntityInternship("INDIA"));
 
 
@@ -133,6 +141,31 @@ public class MatchedFragment extends Fragment  {
 
         CustomAdapterInternship customAdapter= new CustomAdapterInternship(EntityInternshipArrayList,getActivity());
         recyclerView.setAdapter(customAdapter);
+
+    }
+    public  void prepare_news2(){
+
+        EntityInternshipArrayList=new ArrayList<>();
+
+
+
+
+        EntityInternshipArrayList.add(new EntityInternship("General Labour","Labour"));
+        EntityInternshipArrayList.add(new EntityInternship("Graphic Designer","Animation"));
+        EntityInternshipArrayList.add(new EntityInternship("Content Writter","Tech"));
+        EntityInternshipArrayList.add(new EntityInternship("Cleaning","HouseKeeping"));
+        EntityInternshipArrayList.add(new EntityInternship("Hospitality","HouseKeeping"));
+        EntityInternshipArrayList.add(new EntityInternship("Transportation","Quality"));
+        EntityInternshipArrayList.add(new EntityInternship("Marketing","communicator"));
+        EntityInternshipArrayList.add(new EntityInternship("Customer Service","Speaker"));
+
+//        EntityInternshipArrayList.add(new EntityInternship("INDIA"));
+
+
+
+
+        CustomAdapterJobCategory customAdapter2= new CustomAdapterJobCategory(EntityInternshipArrayList,getActivity());
+        recyclerView2.setAdapter(customAdapter2);
 
     }
     // TODO: Rename method, update argument and hook method into UI event
