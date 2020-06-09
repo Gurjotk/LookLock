@@ -102,21 +102,7 @@ public class CustomAdapterInternshipViewJob extends RecyclerView.Adapter<CustomA
        // Glide.with(context).load(entityNewsArrayList.get(position).thumb).into(img_thumb);
 
     }
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        enityInternshipViewJobArrayList.clear();
-        if (charText.length() == 0) {
-            enityInternshipViewJobArrayList.addAll(arraylist);
-        } else {
-            for (EnityInternshipViewJob wp : arraylist) {
-                if (wp.getJobTitle().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    enityInternshipViewJobArrayList.add(wp);
-                }
-            }
-        }
-        notifyDataSetChanged();
 
-    }
 
     @Override
     public int getItemCount() {

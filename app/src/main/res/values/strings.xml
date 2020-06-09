@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Looklock</string>
+    <string name="app_name">JobVibe</string>
     <string name="email_id">Email ID</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
