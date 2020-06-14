@@ -3,7 +3,7 @@ public class EntityInternship {
     String country;
     String companyName;
 
-
+// global class having getter and setter for jobs
 
     public String getCountry() {
         return country;
