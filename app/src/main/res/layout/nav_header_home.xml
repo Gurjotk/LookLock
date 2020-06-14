@@ -24,17 +24,17 @@
         android:id="@+id/TV_profileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gurjot Kaur"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="@dimen/label" />
+        android:text="Bijoy Dutta"
+        android:textSize="@dimen/label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
-    <TextView
-        android:id="@+id/TV_profileEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="gurjot123@gmail.com"
-        android:textSize="@dimen/headlabel" />
+        <TextView
+            android:id="@+id/TV_profileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/headlabel"
+            android:text="bijoy10dutta@gmail.com" />
 
 
 </LinearLayout>

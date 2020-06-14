@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ViewJob extends AppCompatActivity  {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
-    ImageView seachbtn;
+    ImageView seachbtn,IV_backjob;
     CustomAdapterInternshipViewJob customAdapter;
     ArrayList<EnityInternshipViewJob> enityInternshipViewJobArrayList;
     EditText searchtext;
@@ -38,6 +38,13 @@ public class ViewJob extends AppCompatActivity  {
         Intent startingIntent = getIntent();
         final String InternName = startingIntent.getStringExtra("InternName");
         final String RootName = startingIntent.getStringExtra("RootName");
+        IV_backjob=findViewById(R.id.IV_backjob);
+        IV_backjob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
        // Toast.makeText(ViewJob.this, InternName, Toast.LENGTH_SHORT).show();
 
         recyclerView=(RecyclerView)findViewById(R.id.RV_IntenshipViewJob);

@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Login extends AppCompatActivity implements TextWatcher, View.OnClickListener {
-    private TextView tv_btnloginUser,tv_btnloginAdmin, tv_createnew,user_email,user_password,admin_email,admin_password;
+    private TextView tv_btnloginUser,tv_btnloginAdmin, tv_createnew,user_email,admin_email,forgetpassword,invalidpassword;
+   private  TextInputEditText user_password,admin_password;
+   private TextInputLayout TIL_passwordlayout,TIL_passwordlayoutadmin;
+   String [] UserType={"User","Employer"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +58,28 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
         tv_btnloginAdmin = findViewById(R.id.TV_loginbutton_admin);
         user_email=findViewById(R.id.user_email);
         user_password=findViewById(R.id.user_password);
+        invalidpassword=findViewById(R.id.invalidpassword);
         admin_email=findViewById(R.id.admin_email);
         admin_password=findViewById(R.id.admin_password);
+        forgetpassword=findViewById(R.id.forgetpassword);
         tv_createnew = findViewById(R.id.crete_new);
         tv_btnloginUser.setOnClickListener((View.OnClickListener) this);
         tv_btnloginAdmin.setOnClickListener((View.OnClickListener) this);
         tv_createnew.setOnClickListener(this);
+
+
+
+
+
+
+        forgetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profile = new Intent(getApplicationContext(),ForgetPassword.class);
+                startActivity(profile);
+                finish();
+            }
+        });
     }
 
     public void selectUser(View view) {
@@ -67,18 +87,21 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
 
         TextView adminEmail= (TextView)findViewById(R.id.admin_email);
         TextView admintPassword= (TextView)findViewById(R.id.admin_password);
+         TextInputLayout TIL_passwordlayoutadmin=(TextInputLayout)findViewById(R.id.TIL_passwordlayoutadmin);
         TextView adminLoginButton= (TextView)findViewById(R.id.TV_loginbutton_admin);
         adminEmail.setVisibility(View.GONE);
         admintPassword.setVisibility(View.GONE);
         adminLoginButton.setVisibility(View.GONE);
+        TIL_passwordlayoutadmin.setVisibility(View.GONE);
 
         TextView userEmail= (TextView)findViewById(R.id.user_email);
         TextView userPassword= (TextView)findViewById(R.id.user_password);
+        TextInputLayout TIL_passwordlayout=(TextInputLayout)findViewById(R.id.TIL_passwordlayout);
         TextView userLoginButton= (TextView)findViewById(R.id.TV_loginbutton_user);
         userEmail.setVisibility(View.VISIBLE);
         userPassword.setVisibility(View.VISIBLE);
         userLoginButton.setVisibility(View.VISIBLE);
-
+        TIL_passwordlayout.setVisibility(View.VISIBLE);
 
 
         ((TextView)view).setTextColor(this.getResources().getColor(R.color.white));
@@ -94,18 +117,21 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
 
         TextView adminEmail= (TextView)findViewById(R.id.admin_email);
         TextView admintPassword= (TextView)findViewById(R.id.admin_password);
+        TextInputLayout TIL_passwordlayoutadmin=(TextInputLayout)findViewById(R.id.TIL_passwordlayoutadmin);
         TextView adminLoginButton= (TextView)findViewById(R.id.TV_loginbutton_admin);
         adminEmail.setVisibility(View.VISIBLE);
         admintPassword.setVisibility(View.VISIBLE);
         adminLoginButton.setVisibility(View.VISIBLE);
+        TIL_passwordlayoutadmin.setVisibility(View.VISIBLE);
 
-        TextView userEmail= (TextView)findViewById(R.id.user_email);
-        TextView userPassword= (TextView)findViewById(R.id.user_password);
+        EditText userEmail= (EditText)findViewById(R.id.user_email);
+      // TextInputEditText userPassword= (TextInputEditText)findViewById(R.id.user_password);
+       TextInputLayout TIL_passwordlayout=(TextInputLayout)findViewById(R.id.TIL_passwordlayout);
         TextView userLoginButton= (TextView)findViewById(R.id.TV_loginbutton_user);
         userEmail.setVisibility(View.GONE);
-        userPassword.setVisibility(View.GONE);
+      // userPassword.setVisibility(View.GONE);
         userLoginButton.setVisibility(View.GONE);
-
+        TIL_passwordlayout.setVisibility(View.GONE);
 
         ((TextView)view).setTextColor(this.getResources().getColor(R.color.white));
         ((TextView)view).setBackgroundColor(this.getResources().getColor(R.color.bluehead));
@@ -144,10 +170,10 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                 Toast.makeText(Login.this, "UserEmail or Password is empty", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (userEmail.equals("admin@gmail.com")) {
+            /*if (userEmail.equals("admin@gmail.com")) {
                 Toast.makeText(Login.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                 return;
-            }
+            }*/
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             Query query = databaseReference.child("Users");
             query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,9 +182,9 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Model_User user = snapshot.getValue(Model_User.class);
                         user.id = snapshot.getKey();
-                        if (userEmail.equals(user.email) && password.equals(user.password)) {
+                        if (userEmail.equals(user.email) && password.equals(user.password)&& user.UserType.equals("User")) {
 
-                            Toast.makeText(Login.this, "Successfully logged in as User", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Login.this, "Successfully logged in as User", Toast.LENGTH_SHORT).show();
                              SaveLoginUser.user=user;
                             Intent profile = new Intent(getApplicationContext(),Home.class);
                             startActivity(profile);
@@ -168,7 +194,8 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
 
                     }
                     if (SaveLoginUser.user == null) {
-                        Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                        invalidpassword.setVisibility(View.VISIBLE);
                     }
 
 
@@ -192,10 +219,7 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                 Toast.makeText(Login.this, "UserEmail or Password is empty", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (!"admin@gmail.com".equals(userEmail)) {
-                Toast.makeText(Login.this, "Invalid Email", Toast.LENGTH_SHORT).show();
-                return;
-            }
+
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             Query query = databaseReference.child("Users");
@@ -205,10 +229,10 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Model_User user = snapshot.getValue(Model_User.class);
                         user.id = snapshot.getKey();
-                        if (userEmail.equals(user.email) && password.equals(user.password)) {
+                        if (userEmail.equals(user.email) && password.equals(user.password) && user.UserType.equals("Employer")) {
                             SaveLoginUser.user=user;
-                            Toast.makeText(Login.this, "Successfully logged in as Admin", Toast.LENGTH_SHORT).show();
-                            Intent profile = new Intent(Login.this, AddJob.class);
+                           // Toast.makeText(Login.this, "Successfully logged in as Admin", Toast.LENGTH_SHORT).show();
+                            Intent profile = new Intent(Login.this, Admin.class);
                             startActivity(profile);
                             finish();
                         }
@@ -216,7 +240,8 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
                     }
 
                     if (SaveLoginUser.user == null) {
-                        Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Login.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                        invalidpassword.setVisibility(View.VISIBLE);
                     }
 
 

@@ -165,7 +165,7 @@ public class Home extends AppCompatActivity
     private void setterViewPager(ViewPager viewPager) {
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
-        viewAdapter.addFragment(new MatchedFragment(),"Matched");
+        viewAdapter.addFragment(new MatchedFragment(),"Home");
       //  viewAdapter.addFragment(new Recommended(),"Recommended");
         viewPager.setAdapter(viewAdapter);
     }
@@ -177,12 +177,13 @@ public class Home extends AppCompatActivity
         viewAdapter.addFragment(new Saved_Fragment(),"Saved");
         viewAdapter.addFragment(new Applied_Fragment(),"Applied");
         viewPager.setAdapter(viewAdapter);
+
     }
 
     private void setterViewPagerNotification(ViewPager viewPager) {
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
-        viewAdapter.addFragment(new NotificationFragment(),"Notification");
+      //  viewAdapter.addFragment(new NotificationFragment(),"Notification");
         viewPager.setAdapter(viewAdapter);
     }
 

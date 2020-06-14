@@ -14,5 +14,7 @@
     <dimen name="fab_margin">16sp</dimen>
     <dimen name="jobtitle">24sp</dimen>
     <dimen name="jobDetailLabel">22sp</dimen>
+    <dimen name="appbar_padding">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>
 

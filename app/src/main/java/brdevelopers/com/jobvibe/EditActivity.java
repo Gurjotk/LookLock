@@ -85,7 +85,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadProfilePic() {
 
-        DBManager db=new DBManager(this);
+       /* DBManager db=new DBManager(this);
         byte[] byteimg=db.getImage(Home.canemail);
         if(byteimg!=null){
             Bitmap bitimg= BitmapFactory.decodeByteArray(byteimg, 0, byteimg.length);
@@ -96,7 +96,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             {
                 Log.d("logcheck","exception "+ex);
             }
-        }
+        }*/
     }
 
     //Permission menu for access gallery or camera

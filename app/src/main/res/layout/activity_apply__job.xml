@@ -6,22 +6,18 @@
     >
 
 
-   <!-- <ImageView
+    <ImageView
         android:id="@+id/IV_back"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_back_arrow_black"/>-->
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" android:textAllCaps="false"
-    android:text="Job Detail"
-    android:id="@+id/main"/>
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_back_arrow_black" />
+
     <RelativeLayout
         android:id="@+id/RL_heading"
         android:layout_width="match_parent"
-        android:layout_below="@id/main"
+        android:layout_below="@id/IV_back"
         android:layout_height="150dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
@@ -273,9 +269,11 @@
 
 
 
+
                 <View
                     android:id="@+id/splitLine3"
-                    android:layout_width="match_parent"
+                    android:layout_width
+                        ="match_parent"
                     android:layout_height="2dp"
                     android:layout_below="@+id/TV_email"
                     android:background="#37474F" />

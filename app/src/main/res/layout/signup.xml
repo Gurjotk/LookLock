@@ -3,9 +3,19 @@
     android:id="@+id/db1_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbackground"
+    android:background="@drawable/finalbackground"
     android:orientation="vertical" >
 
+    <Spinner
+        android:id="@+id/spinnerusertype"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+       />
 
     <EditText
         android:id="@+id/ET_name"
@@ -17,7 +27,7 @@
         android:inputType="textEmailAddress"
         android:layout_gravity="center_horizontal|center"
         android:textColorHighlight="@color/white"
-        android:layout_marginTop="83dp"
+        android:layout_marginTop="10dp"
         android:textSize="@dimen/label" />
 
     <EditText

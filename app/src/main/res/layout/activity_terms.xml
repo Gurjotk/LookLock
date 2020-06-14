@@ -61,8 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="LookLock is intended only to serve as a preliminary medium of contact and exchange of information for its users /members /visitors who have a bona fide intention to contact and/or be contacted for the purposes related to genuine existing job vacancies and for other career enhancement services."
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:text="Job Vibe is intended only to serve as a preliminary medium of contact and exchange of information for its users /members /visitors who have a bona fide intention to contact and/or be contacted for the purposes related to genuine existing job vacancies and for other career enhancement services." />
 
             <TextView
                 android:layout_width="match_parent"
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4. All LookLock Users agree to not : "
+                android:text="4. All Job Vibe Users agree to not : "
                 android:textColor="@color/bluehead"
                 android:textSize="@dimen/label"
                 android:textStyle="bold" />
@@ -124,7 +124,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
-                android:text="■ Take any action that imposes an unreasonable or disproportionately large load on any LookLock's infrastructure. " />
+                android:text="■ Take any action that imposes an unreasonable or disproportionately large load on any Job Vibe's infrastructure. " />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,13 +148,13 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
-                android:text="■ Reverse engineer or decompile any parts of any LookLock application. " />
+                android:text="■ Reverse engineer or decompile any parts of any Job Vibe application. " />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text=" Violations of system or network security may result in civil and/or criminal liability. LockLock team will investigate occurrences which may involve such violations and may involve, and cooperate with, law enforcement authorities in prosecuting Users who are involved in such violations."
+                android:text=" Violations of system or network security may result in civil and/or criminal liability. Job Vibe team will investigate occurrences which may involve such violations and may involve, and cooperate with, law enforcement authorities in prosecuting Users who are involved in such violations."
                 android:textSize="@dimen/label"
                 android:textColor="@color/black"
                 android:textStyle="bold" />

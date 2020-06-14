@@ -22,7 +22,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +47,11 @@ import java.util.regex.Pattern;
  * Created by End User on 27-03-2018.
  */
 
-public class Sign_up extends AppCompatActivity implements TextWatcher, View.OnClickListener {
+public class Sign_up extends AppCompatActivity implements TextWatcher, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private TextView tv_btnlogin, tv_SignUp;
     private EditText name,mobile,email,password,confirmpassword;
-
+    String[] UserType={"User","Employer"};
+    public String UserTypeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,15 @@ public class Sign_up extends AppCompatActivity implements TextWatcher, View.OnCl
         email = findViewById(R.id.ET_email);
         password= findViewById(R.id.password);
         confirmpassword= findViewById(R.id.ET_cpassword);
+
+        Spinner spin = (Spinner) findViewById(R.id.spinnerusertype);
+        spin.setOnItemSelectedListener(this);
+
+        //Creating the ArrayAdapter instance having the country list
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,UserType);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
 
     }
 
@@ -119,6 +132,7 @@ public class Sign_up extends AppCompatActivity implements TextWatcher, View.OnCl
             user.mobile = MobileValue;
             user.email = EmialValue;
             user.password = passwordValue;
+            user.UserType=UserTypeValue;
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             DatabaseReference users = databaseReference.child("Users");
@@ -143,6 +157,19 @@ public class Sign_up extends AppCompatActivity implements TextWatcher, View.OnCl
                     });
 
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+       // UserTypeValue = UserType.get(i).toString();
+      //  UserTypeValue=UserType.get(i).toString();
+        //Toast.makeText(getApplicationContext(),UserType[i] , Toast.LENGTH_LONG).show();
+        UserTypeValue=UserType[i].toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
 

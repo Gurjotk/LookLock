@@ -47,6 +47,9 @@ public class Apply_Job extends AppCompatActivity {
 
 public  TextView jobTitle,companyName,location,salary,Jobdescription,Designation,CompanyWebsite;
 public  LinearLayout LL_save,LL_apply;
+public Boolean flag=false;
+private ImageView IV_back;
+public String AdminName,jobpostedid;
 //private ImageView IV_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,23 @@ public  LinearLayout LL_save,LL_apply;
         CompanyWebsite=findViewById(R.id.TV_url);
         LL_save=findViewById(R.id.LL_save);
         LL_apply=findViewById(R.id.LL_apply);
-       // IV_back=findViewById(R.id.IV_back);
+
+        IV_back=findViewById(R.id.IV_back);
+
+
+        if(SaveLoginUser.user.UserType.equals("Employer")){
+            LL_save.setVisibility(View.GONE);
+            LL_apply.setVisibility(View.GONE);
+        }
+
+        IV_back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Jobs").child(RootName).child(InternName).child(Id).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,7 +96,7 @@ public  LinearLayout LL_save,LL_apply;
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //
                 Model_View_Job value = dataSnapshot.getValue(Model_View_Job.class);
-                Log.d("testtag", "Value is: " + value.companyName);
+              //  Log.d("testtag", "Value is: " + value.companyName);
                 jobTitle.setText(value.jobTitle);
                 companyName.setText(value.companyName);
                 location.setText(value.city);
@@ -85,6 +104,8 @@ public  LinearLayout LL_save,LL_apply;
                 Jobdescription.setText(value.description);
                 Designation.setText(value.desgnation);
                 CompanyWebsite.setText(value.website);
+                AdminName=value.AdiminId;
+                jobpostedid=value.AdminPostedJobId;
 
             }
 
@@ -107,76 +128,170 @@ public  LinearLayout LL_save,LL_apply;
             @Override
             public void onClick(View view) {
                // Toast.makeText(Apply_Job.this, "Working", Toast.LENGTH_SHORT).show();
-                final Model_View_Job job = new Model_View_Job();
 
-                job.jobTitle=jobTitle.getText().toString();
-                job.companyName=companyName.getText().toString();
-                job.city=location.getText().toString();
-                job.salary=salary.getText().toString();
-                job.description=Jobdescription.getText().toString();
-                job.desgnation=Designation.getText().toString();
-                job.website=CompanyWebsite.getText().toString();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs");
-                String newUserKey = users.push().getKey();
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //
 
-                databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs").child(newUserKey).setValue(job)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(Apply_Job.this, "Job Saved", Toast.LENGTH_SHORT).show();
-
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Model_View_Job user = snapshot.getValue(Model_View_Job.class);
+                            if(user.id.equals(Id)){
+                                Toast.makeText(Apply_Job.this, "You have Already Saved this job", Toast.LENGTH_SHORT).show();
+                                flag=true;
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Apply_Job.this, "Failed to save", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
+
+                        }
+              if(flag==false){
+
+     final Model_View_Job job = new Model_View_Job();
+
+    job.jobTitle=jobTitle.getText().toString();
+    job.companyName=companyName.getText().toString();
+    job.city=location.getText().toString();
+    job.salary=salary.getText().toString();
+    job.description=Jobdescription.getText().toString();
+    job.desgnation=Designation.getText().toString();
+    job.website=CompanyWebsite.getText().toString();
+    job.category=InternName;
+    job.type=RootName;
+    job.id=Id;
+    //  DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs");
+    String newUserKey = users.push().getKey();
+
+    databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs").child(newUserKey).setValue(job)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(Apply_Job.this, "Job Saved", Toast.LENGTH_SHORT).show();
+
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Apply_Job.this, "Failed to save", Toast.LENGTH_SHORT).show();
+                }
+            });
+}
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Apply_Job.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+
+
+
             }
         });
 
         LL_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Toast.makeText(Apply_Job.this, "Working", Toast.LENGTH_SHORT).show();
-                final Model_View_Job job = new Model_View_Job();
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                databaseReference.child("Users").child(SaveLoginUser.user.id).child("ApplyJobs").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //
 
-                job.jobTitle=jobTitle.getText().toString();
-                job.companyName=companyName.getText().toString();
-                job.city=location.getText().toString();
-                job.salary=salary.getText().toString();
-                job.description=Jobdescription.getText().toString();
-                job.desgnation=Designation.getText().toString();
-                job.website=CompanyWebsite.getText().toString();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("ApplyJobs");
-                String newUserKey = users.push().getKey();
-
-                databaseReference.child("Users").child(SaveLoginUser.user.id).child("ApplyJobs").child(newUserKey).setValue(job)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(Apply_Job.this, "Job Applied", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Apply_Job.this, JobSuccess.class);
-                                startActivity(intent);
-                                finish();
-
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Model_View_Job user = snapshot.getValue(Model_View_Job.class);
+                            if(user.id.equals(Id)){
+                                Toast.makeText(Apply_Job.this, "You have Already Applied this job", Toast.LENGTH_SHORT).show();
+                                flag=true;
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Apply_Job.this, "Failed to Applied", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
+
+                        }
+                        if(flag==false){
+
+                            final Model_View_Job job = new Model_View_Job();
+
+                            job.jobTitle=jobTitle.getText().toString();
+                            job.companyName=companyName.getText().toString();
+                            job.city=location.getText().toString();
+                            job.salary=salary.getText().toString();
+                            job.description=Jobdescription.getText().toString();
+                            job.desgnation=Designation.getText().toString();
+                            job.website=CompanyWebsite.getText().toString();
+                            job.category=InternName;
+                            job.type=RootName;
+                            job.id=Id;
+                            //  DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("ApplyJobs");
+                            String newUserKey = users.push().getKey();
+
+                            databaseReference.child("Users").child(SaveLoginUser.user.id).child("ApplyJobs").child(newUserKey).setValue(job)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                           // Toast.makeText(Apply_Job.this, "Job Applied", Toast.LENGTH_SHORT).show();
+                                            adminApplyJob();
+
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Apply_Job.this, "Failed to jobs", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Apply_Job.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
             }
         });
     }
+public void adminApplyJob(){
 
-    private void applyJob() {
 
-    }
+    final Model_User user =new Model_User();
+    user.name=SaveLoginUser.user.name;
+    user.email=SaveLoginUser.user.email;
+      DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference users = databaseReference.child("Users").child(AdminName).child("PostedJobs").child(jobpostedid).child("UserAppliedOnJob");
+    String newUserKey = users.push().getKey();
+user.id=newUserKey;
+    databaseReference.child("Users").child(AdminName).child("PostedJobs").child(jobpostedid).child("UserAppliedOnJob").child(newUserKey).setValue(user)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Toast.makeText(Apply_Job.this, "Job Applied", Toast.LENGTH_SHORT).show();
+                    
+                    Intent profile = new Intent(Apply_Job.this, JobSuccess.class);
+                    startActivity(profile);
+                    finish();
+
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Apply_Job.this, "Failed to jobs", Toast.LENGTH_SHORT).show();
+                }
+            });
+}
+
 
 }

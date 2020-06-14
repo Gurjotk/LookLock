@@ -84,7 +84,9 @@ public class CustomAdapterInternshipViewJob extends RecyclerView.Adapter<CustomA
               String b = enityInternshipViewJobArrayList.get(position).getInternName();
               String c = enityInternshipViewJobArrayList.get(position).getId();
               Intent profile = new Intent(context,Apply_Job.class);
-
+              //  Log.d("aa", "onClick: "+a);
+             //   Log.d("aa", "onClick: "+b);
+              //  Log.d("aa", "onClick: "+c);
             profile.putExtra("RootName",a);
                 profile.putExtra("InternName",b);
                 profile.putExtra("Id",c);

@@ -14,7 +14,7 @@ public class Model_User {
 
     public String email;
 
-
+public String UserType;
     public String password;
 
     public String profileImage;

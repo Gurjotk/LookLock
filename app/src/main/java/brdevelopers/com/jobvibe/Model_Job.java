@@ -14,7 +14,7 @@ public class Model_Job {
     public String city;
 
     public String jobTitle;
-
+public String AdiminId;
 
     public String desgnation;
 

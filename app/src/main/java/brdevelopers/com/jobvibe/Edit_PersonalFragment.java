@@ -69,7 +69,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
 
     String[] country = { "India", "USA", "China", "Japan", "Other"};
     String [] degreevalues =
-            {"High School Diploma","AEC","DEC","Bachelor Degree","Master Degree","4-8 years"};
+            {"High School Diploma","AEC","DEC","Bachelor Degree","Master Degree","Doctorate"};
 
     String [] studyvalue =
             {"Agriculture","Accounting","Business Economics","Business Finance","Communication and Journalism","Computer and Information","Science","Educational Administration and supervision","Engineering","Geography and Cartography","Mechanic and Repair Technologies","Psychology","Dance","Design and Applied Arts"};
