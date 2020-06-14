@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/db1_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+    <ScrollView android:layout_marginTop="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type"/>
+
+                <Spinner
+                    android:id="@+id/et_type"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"/>
+                <EditText
+                    android:id="@+id/et_city"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter City"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"/>
+
+                <Spinner
+                    android:id="@+id/et_category"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job Title"/>
+                <EditText
+                    android:id="@+id/et_jobtitle"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Job Title"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Designation"/>
+                <EditText
+                    android:id="@+id/et_designation"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Designation"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"/>
+                <EditText
+                    android:id="@+id/et_description"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Description"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salary"/>
+                <EditText
+                    android:id="@+id/et_salary"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Salary"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CompanyName"/>
+                <EditText
+                    android:id="@+id/et_companyName"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Company Name"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Website"/>
+                <EditText
+                    android:id="@+id/et_website"
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Enter Website"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center_horizontal|center"
+                    android:textColorHighlight="#F8F7F7"
+                    android:layout_marginTop="0dp"
+                    android:textSize="@dimen/label" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/TV_addJob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RL_login"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="53dp"
+                android:layout_marginRight="52dp"
+                android:background="@drawable/signup_btn_bg"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Add Job"
+                android:textColor="#F8F7F7"
+                android:textSize="@dimen/label"
+                android:textStyle="bold" />
+
+            <!--<TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="55dp"
+                android:background="@drawable/tologinbg"
+                android:padding="15dp"
+                android:text="Or Cancel"
+                android:textColor="#F8F7F7"
+                android:textSize="@dimen/label"
+                android:textStyle="bold|italic" />-->
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
