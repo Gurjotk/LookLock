@@ -51,11 +51,12 @@ public class Edit_EducationFragment extends Fragment implements View.OnClickList
     private EditText universityBoard,universityUniversity,universityYear,universityPercentage;
     private EditText experineceDesignation,experinecPeriod,experineceSkills;
     private EditText experineceDesignationSecond,experinecPeriodSecond,experineceSkillsSecond;
+    private EditText ET_secUniDegree,ET_secUniName,ET_secUniyear,ET_secUniPer;
     private TextView tv_btnnext;
-    private ImageView add_exp;
+    private ImageView add_exp,plus_university;
     private ProgressBar progressBar;
 
-private LinearLayout LL_experinecesec;
+private LinearLayout LL_experinecesec,RL_secondUni;
 
 
     @Override
@@ -72,6 +73,13 @@ private LinearLayout LL_experinecesec;
         universityYear=view.findViewById(R.id.ET_10yoc);
         universityPercentage=view.findViewById(R.id.ET_10per);
 
+        ET_secUniDegree=view.findViewById(R.id.ET_secUniDegree);
+        ET_secUniName=view.findViewById(R.id.ET_secUniName);
+        ET_secUniyear=view.findViewById(R.id.ET_secUniyear);
+        ET_secUniPer=view.findViewById(R.id.ET_secUniPer);
+
+
+
         experineceDesignation=view.findViewById(R.id.ET_Designation);
         experinecPeriod=view.findViewById(R.id.ET_Period);
         experineceSkills=view.findViewById(R.id.pp_skills);
@@ -84,10 +92,12 @@ private LinearLayout LL_experinecesec;
 
         tv_btnnext=view.findViewById(R.id.TV_btnnext);
         add_exp=view.findViewById(R.id.plus_experience);
+        plus_university=view.findViewById(R.id.plus_university);
         LL_experinecesec=view.findViewById(R.id.LL_experinecesec);
+        RL_secondUni=view.findViewById(R.id.RL_secondUni);
         add_exp.setOnClickListener(this);
         tv_btnnext.setOnClickListener(this);
-
+        plus_university.setOnClickListener(this);
 
 
 
@@ -114,6 +124,11 @@ private LinearLayout LL_experinecesec;
                 universityYear.setText(value.universityYear);
                 universityPercentage.setText(value.universityPercentage);
 
+                ET_secUniDegree.setText(value.SecUniversityBoard);
+                ET_secUniName.setText(value.SecUniversityUniversity);
+                ET_secUniyear.setText(value.SecUniversityYear);
+                ET_secUniPer.setText(value.SecUniversityPercentage);
+
                 experineceDesignation.setText(value.experineceDesignation);
                 experinecPeriod.setText(value.experinecPeriod);
                 experineceSkills.setText(value.experineceSkills);
@@ -124,9 +139,15 @@ private LinearLayout LL_experinecesec;
 
                 String checkSecondDes=String.valueOf((value.experineceDesignationSecond));
                 Boolean valval=TextUtils.isEmpty(checkSecondDes);
-                Log.d("tagrtbh", "onDataChange: "+valval);
+             //   Log.d("tagrtbh", "onDataChange: "+valval);
                 if(!TextUtils.isEmpty(checkSecondDes)&& !checkSecondDes.equals("null") ){
                     LL_experinecesec.setVisibility(View.VISIBLE);
+
+
+                }
+                String checkSecUniName=String.valueOf((value.SecUniversityUniversity));
+                if(!TextUtils.isEmpty(checkSecUniName)&& !checkSecUniName.equals("null") ){
+                    RL_secondUni.setVisibility(View.VISIBLE);
 
 
                 }
@@ -167,6 +188,11 @@ private LinearLayout LL_experinecesec;
             String u_year=universityYear.getText().toString();
             String u_per=universityPercentage.getText().toString();
 
+            String u_borad_sec=ET_secUniDegree.getText().toString();
+            String u_university_sec=ET_secUniName.getText().toString();
+            String u_year_sec=ET_secUniyear.getText().toString();
+            String u_per_sec=ET_secUniPer.getText().toString();
+
             String e_exper=experineceDesignation.getText().toString();
             String e_period=experinecPeriod.getText().toString();
             String e_skills=experineceSkills.getText().toString();
@@ -188,6 +214,11 @@ private LinearLayout LL_experinecesec;
             user.universityUniversity=u_university;
             user.universityYear=u_year;
             user.universityPercentage=u_per;
+
+            user.SecUniversityBoard=u_borad_sec;
+            user.SecUniversityUniversity=u_university_sec;
+            user.SecUniversityYear=u_year_sec;
+            user.SecUniversityPercentage=u_per_sec;
 
             user.experineceDesignation=e_exper;
             user.experinecPeriod=e_period;
@@ -228,6 +259,13 @@ private LinearLayout LL_experinecesec;
             }
             LL_experinecesec.setVisibility(View.VISIBLE);
 
+        }
+        else  if(v.getId()==R.id.plus_university){
+            if(RL_secondUni.getVisibility() == View.VISIBLE) {
+                Toast.makeText(getActivity(), "You can't add more then 2 University", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RL_secondUni.setVisibility(View.VISIBLE);
         }
 
     }

@@ -86,7 +86,7 @@ public class Applied_Fragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Model_View_Job user = snapshot.getValue(Model_View_Job.class);
 
-                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category));
+                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category,user.datetime,"SAVE","HIDEBOTH"));
                 }
 
                 //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));

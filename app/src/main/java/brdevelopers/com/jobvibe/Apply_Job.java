@@ -50,18 +50,27 @@ public  LinearLayout LL_save,LL_apply;
 public Boolean flag=false;
 private ImageView IV_back;
 public String AdminName,jobpostedid;
+public String savedRootname,savedInternName,savedId,savedPostId;
+
 //private ImageView IV_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply__job);
 
-
         Intent startingIntent = getIntent();
         final String RootName = startingIntent.getStringExtra("RootName");
         final String InternName = startingIntent.getStringExtra("InternName");
         final String Id = startingIntent.getStringExtra("Id");
+        final String loginsavedId=startingIntent.getStringExtra("SavedJobId");
+        final String buttonView=startingIntent.getStringExtra("buttonView");
 
+
+
+           savedRootname=RootName;
+           savedInternName=InternName;
+           savedId=Id;
+        savedPostId=loginsavedId;
 
         jobTitle = findViewById(R.id.TV_jobtitle);
         companyName = findViewById(R.id.TV_companyname);
@@ -77,6 +86,13 @@ public String AdminName,jobpostedid;
 
 
         if(SaveLoginUser.user.UserType.equals("Employer")){
+            LL_save.setVisibility(View.GONE);
+            LL_apply.setVisibility(View.GONE);
+        }
+        if(buttonView.equals("HIDESAVE")){
+            LL_save.setVisibility(View.GONE);
+        }
+        else if(buttonView.equals("HIDEBOTH")){
             LL_save.setVisibility(View.GONE);
             LL_apply.setVisibility(View.GONE);
         }
@@ -96,7 +112,7 @@ public String AdminName,jobpostedid;
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //
                 Model_View_Job value = dataSnapshot.getValue(Model_View_Job.class);
-              //  Log.d("testtag", "Value is: " + value.companyName);
+
                 jobTitle.setText(value.jobTitle);
                 companyName.setText(value.companyName);
                 location.setText(value.city);
@@ -145,6 +161,7 @@ public String AdminName,jobpostedid;
 
                         }
               if(flag==false){
+                  updateSaveStatus();
 
      final Model_View_Job job = new Model_View_Job();
 
@@ -161,6 +178,7 @@ public String AdminName,jobpostedid;
     //  DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs");
     String newUserKey = users.push().getKey();
+    job.savejobId=newUserKey;
 
     databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs").child(newUserKey).setValue(job)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -263,22 +281,54 @@ public String AdminName,jobpostedid;
             }
         });
     }
+
+    public void updateSaveStatus(){
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("savedjob","yes" );
+
+
+
+        //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("password");
+
+        FirebaseDatabase.getInstance().getReference().child("Jobs").child(savedRootname).child(savedInternName).child(savedId).updateChildren(result)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
+    }
+
 public void adminApplyJob(){
 
 
     final Model_User user =new Model_User();
     user.name=SaveLoginUser.user.name;
     user.email=SaveLoginUser.user.email;
+    user.id=SaveLoginUser.user.id;
       DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference users = databaseReference.child("Users").child(AdminName).child("PostedJobs").child(jobpostedid).child("UserAppliedOnJob");
+
     String newUserKey = users.push().getKey();
-user.id=newUserKey;
+
     databaseReference.child("Users").child(AdminName).child("PostedJobs").child(jobpostedid).child("UserAppliedOnJob").child(newUserKey).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     // Toast.makeText(Apply_Job.this, "Job Applied", Toast.LENGTH_SHORT).show();
-                    
+
+                    if(!savedPostId.equals("SAVE")){
+                        deleteSavejob();
+                    }
                     Intent profile = new Intent(Apply_Job.this, JobSuccess.class);
                     startActivity(profile);
                     finish();
@@ -293,5 +343,11 @@ user.id=newUserKey;
             });
 }
 
+public void deleteSavejob(){
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference savedpost = databaseReference.child("Users").child(SaveLoginUser.user.id).child("SavedJobs").child(savedPostId);
+              savedpost.removeValue();
+
+}
 
 }

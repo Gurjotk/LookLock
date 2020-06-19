@@ -161,6 +161,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/date_of_birth"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <EditText
                 android:id="@+id/ET_dob"
                 android:layout_width="wrap_content"
@@ -175,10 +179,12 @@
             <ImageView
                 android:id="@+id/IV_dob"
                 android:layout_width="35dp"
+                android:layout_marginLeft="@dimen/_55sdp"
                 android:layout_height="35dp"
                 android:layout_below="@id/TV_dob"
                 android:layout_toRightOf="@id/ET_dob"
-                android:src="@drawable/ic_calendar"/>
+                android:src="@drawable/calendar"/>
+            </LinearLayout>
             <TextView
                 android:id="@+id/TV_age"
                 android:layout_width="wrap_content"

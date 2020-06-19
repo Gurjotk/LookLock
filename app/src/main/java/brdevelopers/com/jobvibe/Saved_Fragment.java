@@ -87,7 +87,7 @@ public class Saved_Fragment extends Fragment {
                     Model_View_Job user = snapshot.getValue(Model_View_Job.class);
                  //   user.id = snapshot.getKey();
                     Log.d("mytag", user.companyName);
-                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category));
+                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category,user.datetime,user.savejobId,"HIDESAVE"));
                 }
 
                 //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));

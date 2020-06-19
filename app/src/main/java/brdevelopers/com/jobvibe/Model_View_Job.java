@@ -14,11 +14,13 @@ public class Model_View_Job {
 
     public String companyName;
     public String AdiminId;
-
+    public  String datetime;
     public String description;
     public String AdminPostedJobId;
     public String desgnation;
     public String jobTitle;
+    public String savedjob;
+    public  String savejobId;
     public String salary;
     public String type;
     public String website;

@@ -120,7 +120,10 @@
 
                 android:orientation="vertical"
                 android:layout_marginTop="20dp">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
                 <TextView
                     android:id="@+id/TV_10edu"
                     android:layout_width="wrap_content"
@@ -129,6 +132,14 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/headlabel"
                     android:textColor="#2b78e4"/>
+    <ImageView
+        android:layout_width="@dimen/_50sdp"
+        android:id="@+id/plus_university"
+        android:maxHeight="@dimen/_50sdp"
+        android:layout_marginHorizontal="@dimen/_140sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_circle_blue"/>
+</LinearLayout>
 
                 <TextView
                     android:id="@+id/TV_10board"
@@ -200,6 +211,94 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/RL_secondUni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/RL_secondUniHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Another University"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/headlabel"
+                    android:textColor="#2b78e4"/>
+
+                <TextView
+                    android:id="@+id/TV_secUniDegree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Degree"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/pofileTV"/>
+                <EditText
+                    android:id="@+id/ET_secUniDegree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="textCapWords"/>
+
+                <TextView
+                    android:id="@+id/TV_secUniName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="University Name"
+                    android:textSize="@dimen/pofileTV"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/ET_secUniName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="textCapWords"/>
+
+                <TextView
+                    android:id="@+id/tv_secUniyear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Year of completion"
+                    android:textSize="@dimen/pofileTV"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/ET_secUniyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="number"
+                    android:maxLength="4"/>
+
+                <TextView
+                    android:id="@+id/TV_secUniper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/percentage"
+                    android:textSize="@dimen/pofileTV"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/ET_secUniPer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/pofileET"
+                    android:inputType="numberDecimal"/>
+
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/RL_curedu"

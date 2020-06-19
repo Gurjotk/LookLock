@@ -19,6 +19,11 @@ public class Model_education_details {
     public String universityYear;
     public String universityPercentage;
 
+    public String SecUniversityBoard;
+    public String SecUniversityUniversity;
+    public String SecUniversityYear;
+    public String SecUniversityPercentage;
+
     public String experineceDesignation;
     public String experinecPeriod;
     public String experineceSkills;

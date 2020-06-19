@@ -44,6 +44,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -75,8 +79,9 @@ public class Home extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_home);
-
+        updateToken();
         iv_home=findViewById(R.id.IV_home);
         iv_activity=findViewById(R.id.IV_activity);
 //        iv_notification=findViewById(R.id.IV_notification);
@@ -284,6 +289,13 @@ public class Home extends AppCompatActivity
             finish();
 
         }
+        else if (id == R.id.nav_resume) {
+            Intent intent=new Intent(Home.this,Resume.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.topttobottom,R.anim.bottomtotop);
+            finish();
+
+        }
         else if(id==R.id.nav_logout){
 
             SharedPreferences sharedPreferences=getSharedPreferences("Data",MODE_PRIVATE);
@@ -388,5 +400,12 @@ public class Home extends AppCompatActivity
 
     }
 
-
+    public void updateToken() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) { String newToken = instanceIdResult.getToken();
+               Log.d("tokennnnnn",newToken);
+            }
+        });
+    }
 }

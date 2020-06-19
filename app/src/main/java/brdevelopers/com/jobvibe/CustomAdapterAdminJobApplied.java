@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -95,12 +97,24 @@ public class CustomAdapterAdminJobApplied extends RecyclerView.Adapter<CustomAda
         });
 
         holder.applicants.removeAllViews();
-        for (Model_User user : entityAdminJobApplied.users) {
+        for (final Model_User user : entityAdminJobApplied.users) {
             View userView = holder.inflater.inflate(R.layout.item_applicant, holder.applicants, false);
             ((TextView) userView.findViewById(R.id.user_name)).setText(user.name);
             ((TextView) userView.findViewById(R.id.user_email)).setText(user.email);
+            userView.findViewById(R.id.user_name).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("pp", "onClick: "+user.name);
+                    Intent userDetails = new Intent(context, ViewUserDetails.class);
+                    String UserId=user.id;
+                    userDetails.putExtra("UserId",UserId);
+                    context.startActivity(userDetails);
+
+                }
+            });
             holder.applicants.addView(userView);
         }
+
     }
 
 

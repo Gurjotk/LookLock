@@ -63,6 +63,7 @@ public class MatchedFragment extends Fragment  {
     RecyclerView.LayoutManager layoutManager,layoutManager2;
     RecyclerView recyclerView,recyclerView2;
     ArrayList<EntityInternship> EntityInternshipArrayList;
+    TextView searhJob;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,11 +106,23 @@ public class MatchedFragment extends Fragment  {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.matched_fragment, container, false);
+        searhJob=(TextView)view.findViewById(R.id.searhJob);
+
+        searhJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchJobhome = new Intent(getActivity(), SearchJob.class);
+                startActivity(searchJobhome);
+
+            }
+        });
 
         recyclerView=(RecyclerView) view.findViewById(R.id.RV_Intenship);
         layoutManager=new LinearLayoutManager( getActivity(),LinearLayoutManager.HORIZONTAL,false);

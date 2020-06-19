@@ -50,28 +50,6 @@ public class ViewJob extends AppCompatActivity  {
         recyclerView=(RecyclerView)findViewById(R.id.RV_IntenshipViewJob);
         layoutManager=new LinearLayoutManager( this);
         recyclerView.setLayoutManager(layoutManager);
-       // prepare_news();
-        seachbtn=findViewById(R.id.seachbtn);
-        searchtext=findViewById(R.id.searchtext);
-        seachbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               String searchvalue=searchtext.getText().toString();
-                for(int i=0;i<enityInternshipViewJobArrayList.size();i++){
-                    if(enityInternshipViewJobArrayList.get(i).JobTitle.contains(searchvalue.trim())){
-                        Log.d("hhh", "onClick: "+enityInternshipViewJobArrayList.get(i).JobTitle);
-                        String filterTitle=enityInternshipViewJobArrayList.get(i).JobTitle;
-                                String FilterCity=enityInternshipViewJobArrayList.get(i).Location;
-                                String FilterCmpanyName=enityInternshipViewJobArrayList.get(i).CompanyName;
-                        enityInternshipViewJobArrayList.clear();
-                        enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(filterTitle,FilterCity,FilterCmpanyName,SaveLoginUser.user.id,RootName,InternName));
-                        customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,ViewJob.this);
-                        recyclerView.setAdapter(customAdapter);
-                    }
-                }
-
-            }
-        });
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Jobs").child(RootName).child(InternName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,7 +63,7 @@ public class ViewJob extends AppCompatActivity  {
                     Model_View_Job user = snapshot.getValue(Model_View_Job.class);
                     user.id = snapshot.getKey();
                     Log.d("mytag", user.companyName);
-                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,RootName,InternName));
+                    enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,RootName,InternName,user.datetime,"SAVE","SHOWBOTH"));
 
                 }
 

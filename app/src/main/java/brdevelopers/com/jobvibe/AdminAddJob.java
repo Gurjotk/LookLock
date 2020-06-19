@@ -16,7 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -96,7 +97,7 @@ String AdminPostedJobId;
         companyName= view.findViewById(R.id.et_companyName);
         website= view.findViewById(R.id.et_website);
 
-
+        salary.setText("$ ");
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
 
@@ -157,6 +158,9 @@ String AdminPostedJobId;
             }
 
 
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
+           String  dateTime = simpleDateFormat.format(calendar.getTime());
 
             final Model_Job job = new Model_Job();
             job.category = InternValue;
@@ -169,6 +173,8 @@ String AdminPostedJobId;
             job.website = websiteValue;
             job.type=TypeValue;
             job.AdiminId=SaveLoginUser.user.id;
+            job.datetime=dateTime;
+            job.savedjob="No";
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             DatabaseReference users = databaseReference.child("Jobs").child(TypeValue).child(InternValue);

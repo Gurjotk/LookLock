@@ -14,16 +14,19 @@
         android:roundIcon="@drawable/jvtie"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Resume"></activity>
+        <activity android:name=".ViewUserDetails" />
+        <activity android:name=".SearchJob" />
         <activity
             android:name=".Admin"
             android:label="@string/title_activity_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".JobSuccess" />
         <activity android:name=".ViewJob" />
         <activity
             android:name=".SplashScreen"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,25 +35,37 @@
         </activity>
         <activity
             android:name=".Login"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Profile"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Sign_up"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".Apply_Job" />
         <activity android:name=".EditActivity" />
         <activity android:name=".FAQ" />
         <activity android:name=".Terms" />
         <activity android:name=".AboutUs" />
+
+        <!--<service-->
+            <!--android:name=".pushNotification.FirebaseDataReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+        <service android:name=".pushNotification.FirebaseDataReceiver">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

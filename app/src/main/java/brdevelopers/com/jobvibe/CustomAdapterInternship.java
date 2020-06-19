@@ -85,6 +85,7 @@ public class CustomAdapterInternship extends RecyclerView.Adapter<CustomAdapterI
     }
 
 
+
     @Override
     public int getItemCount() {
         return entityInternshipArrayList.size();

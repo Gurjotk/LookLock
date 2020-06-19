@@ -17,11 +17,12 @@ public class Model_Job {
 public String AdiminId;
 
     public String desgnation;
-
+public  String datetime;
     public String description;
     public String salary;
     public String companyName;
     public String website;
     public String type;
+    public String savedjob;
 
 }

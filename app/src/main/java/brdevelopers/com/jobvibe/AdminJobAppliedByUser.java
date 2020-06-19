@@ -100,7 +100,9 @@ public class AdminJobAppliedByUser extends Fragment {
                     List<Model_User> users = new ArrayList<>();
                     for (DataSnapshot usersAppliedOnJobSnapshopt : snapshot.child("UserAppliedOnJob").getChildren()) {
                         Model_User modelUser = usersAppliedOnJobSnapshopt.getValue(Model_User.class);
+
                         users.add(modelUser);
+
                     }
 
                     if (users.isEmpty()) {

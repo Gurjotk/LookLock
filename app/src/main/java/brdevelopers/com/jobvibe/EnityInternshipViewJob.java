@@ -5,6 +5,26 @@ public class EnityInternshipViewJob {
     String Location;
     String CompanyName;
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    String dateTime;
+
+    public String getSavedJob() {
+        return savedJob;
+    }
+
+    public void setSavedJob(String savedJob) {
+        this.savedJob = savedJob;
+    }
+
+    String savedJob;
+
 
     public String getId() {
         return id;
@@ -34,14 +54,27 @@ public class EnityInternshipViewJob {
 
     String rootName;
     String interName;
+    String buttonView;
+    public String getButtonView() {
+        return buttonView;
+    }
 
-    public EnityInternshipViewJob(String jobTitle, String location, String companyName, String Id,String RootName,String InterName) {
+    public void setButtonView(String buttonView) {
+        this.buttonView = buttonView;
+    }
+
+
+
+    public EnityInternshipViewJob(String jobTitle, String location, String companyName, String Id,String RootName,String InterName,String DateTime,String SavedJob,String ButtonView) {
         JobTitle = jobTitle;
         Location = location;
         CompanyName = companyName;
         id = Id;
         rootName=RootName;
         interName=InterName;
+        dateTime=DateTime;
+        savedJob=SavedJob;
+        buttonView=ButtonView;
     }
 
 

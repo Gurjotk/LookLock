@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="brdevelopers.com.jobvibe.Profile"
+    android:background="@color/gray">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+
+        <LinearLayout
+            android:id="@+id/LL_info"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TV_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Bijoy Dutta"
+                android:gravity="center"
+                android:textSize="@dimen/jobDetailLabel"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/TV_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="bijoy10dutta@gmail.com"
+                android:gravity="center"
+                android:textSize="@dimen/label"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewprofile"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:src="@drawable/face"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:layout_marginBottom="35dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFFFFF"/>
+
+        <ImageView
+            android:id="@+id/IV_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow_black"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/frameLayout"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/TV_editPersonal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="General Information"
+            android:textSize="@dimen/headlabel"
+            android:padding="7dp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+
+android:orientation="vertical"        android:layout_height="wrap_content"
+        android:layout_below="@+id/LL_edit">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Mobile"
+                android:textColor="#00BCD4"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/_16sdp"/>
+            <TextView
+                android:id="@+id/TV_mobileValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_50sdp"
+                android:text="@string/board"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_universityname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="University Name"
+                android:textColor="#00BCD4"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/_16sdp"/>
+            <TextView
+                android:id="@+id/TV_universitynameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_50sdp"
+                android:text="@string/board"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_experienceDesignation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Designation"
+                android:textColor="#00BCD4"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/_16sdp"/>
+            <TextView
+                android:id="@+id/TV_experienceDesignationValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_50sdp"
+                android:text="@string/board"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_experienceSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Skills"
+                android:textColor="#00BCD4"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/_16sdp"/>
+            <TextView
+                android:id="@+id/TV_experienceSkillsValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_50sdp"
+                android:text="Skills"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

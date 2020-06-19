@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,12 @@ import brdevelopers.com.jobvibe.ui.main.SectionsPagerAdapter;
 
 public class Admin extends AppCompatActivity {
 private Button AdminGoBack;
+private TextView titleEmploy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        titleEmploy=(TextView)findViewById(R.id.titleEmploy);
         AdminGoBack= findViewById(R.id.AdminGoBack);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -33,6 +36,8 @@ private Button AdminGoBack;
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         setterViewPagerActivity(viewPager);
+
+        titleEmploy.setText(SaveLoginUser.user.name);
 
         AdminGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +55,7 @@ private Button AdminGoBack;
         //  viewAdapter.addFragment(new Viewed_Fragment(),"Viewed");
         viewAdapter.addFragment(new AdminAddJob(),"New");
         viewAdapter.addFragment(new AdminPostedJob(),"Posted");
-        viewAdapter.addFragment(new AdminJobAppliedByUser(),"Applied");
+        viewAdapter.addFragment(new AdminJobAppliedByUser(),"Applied By User");
         viewPager.setAdapter(viewAdapter);
     }
 

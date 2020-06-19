@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="55dp"
-        android:background="@drawable/tologinbg"
+        android:background="@drawable/signup_btn_bg"
         android:padding="15dp"
         android:text="Or Login"
         android:textColor="@color/white"
