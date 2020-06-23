@@ -97,7 +97,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
         iv_dob=view.findViewById(R.id.IV_dob);
         TV_btnnext_personal_update=view.findViewById(R.id.TV_btnnext_personal_update);
         tv_age=view.findViewById(R.id.TV_age);
-        ET_Experience=view.findViewById(R.id.ET_Experience);
+       // ET_Experience=view.findViewById(R.id.ET_Experience);
         progressBar=view.findViewById(R.id.progressbar);
 
         String email=Home.canemail;
@@ -147,7 +147,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
                 degree.setSelection(adapter.getPosition(value.degree));
                 // et_fos.setText(value.website);
                 study.setSelection(adapter2.getPosition(value.fieldStudy));
-                ET_Experience.setText(value.Experience);
+               // ET_Experience.setText(value.Experience);
             }
 
             @Override
@@ -195,7 +195,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
             String pincode=et_pincode.getText().toString();
             String city=et_city.getText().toString();
             String dob=et_dob.getText().toString();
-            String exper=ET_Experience.getText().toString();
+          //  String exper=ET_Experience.getText().toString();
           //  String degree=et_degree.getText().toString();
             //String fos=et_fos.getText().toString();
             boolean bolMale=radio_male.isChecked();
@@ -211,7 +211,7 @@ public class Edit_PersonalFragment extends Fragment implements View.OnClickListe
             user.dateOfBirth=dob;
             user.male=bolMale;
             user.female=bolFemale;
-            user.Experience=exper;
+           // user.Experience=exper;
             user.fieldStudy=studyValue;
             user.degree=degreeValue;
 

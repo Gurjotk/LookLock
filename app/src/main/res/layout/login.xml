@@ -228,7 +228,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/signup_btn_bg"
+            android:background="@drawable/tosignupbg"
             android:padding="15dp"
             android:text="Or Signup"
             android:textColor="#FCF9F9"

@@ -18,7 +18,7 @@
             android:layout_width="@dimen/_140sdp"
             android:layout_height="@dimen/_35sdp"
             android:background="@drawable/orangeborder_whiteback"
-            android:text="Seach Job Here .."
+            android:text="Search Job Here .."
             android:textColor="#161515"
 android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"

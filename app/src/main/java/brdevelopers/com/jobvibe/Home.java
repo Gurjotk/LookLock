@@ -44,8 +44,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -56,6 +59,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -81,7 +85,10 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_home);
-        updateToken();
+
+        if(SaveLoginUser.user.UserType.equals("User")) {
+            updateToken();
+        }
         iv_home=findViewById(R.id.IV_home);
         iv_activity=findViewById(R.id.IV_activity);
 //        iv_notification=findViewById(R.id.IV_notification);
@@ -170,7 +177,7 @@ public class Home extends AppCompatActivity
     private void setterViewPager(ViewPager viewPager) {
 
         ViewAdapter viewAdapter=new ViewAdapter(getSupportFragmentManager());
-        viewAdapter.addFragment(new MatchedFragment(),"Home");
+        viewAdapter.addFragment(new MatchedFragment(),"Jobs");
       //  viewAdapter.addFragment(new Recommended(),"Recommended");
         viewPager.setAdapter(viewAdapter);
     }
@@ -304,6 +311,11 @@ public class Home extends AppCompatActivity
             editor.putString("password","");
             editor.commit();
 
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference savedpost = databaseReference.child("Users").child(SaveLoginUser.user.id).child("PushToken");
+            savedpost.removeValue();
+
             Intent login=new Intent(Home.this,Login.class);
             startActivity(login);
             finish();
@@ -405,7 +417,33 @@ public class Home extends AppCompatActivity
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) { String newToken = instanceIdResult.getToken();
                Log.d("tokennnnnn",newToken);
+                updateTokentoFirebase(newToken);
             }
         });
+    }
+
+    private void updateTokentoFirebase(String newToken) {
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("PushToken",newToken);
+
+
+
+        //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference users = databaseReference.child("Users").child(SaveLoginUser.user.id).child("password");
+
+        FirebaseDatabase.getInstance().getReference().child("Users").child(SaveLoginUser.user.id).updateChildren(result)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 }

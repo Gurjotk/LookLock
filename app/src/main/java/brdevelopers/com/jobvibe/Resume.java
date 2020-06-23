@@ -37,6 +37,7 @@ public class Resume extends AppCompatActivity {
     private final int REQUEST_CODE_DOC=999;
     private TextView uploadresume,viewResume;
     private ImageView IV_back_reume;
+    private static final int REQUEST_RUNTIME_PERMISSION = 123;
     public StorageReference mStorageRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

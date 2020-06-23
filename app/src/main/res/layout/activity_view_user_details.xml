@@ -132,7 +132,7 @@ android:orientation="vertical"        android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:text="University Name"
+                android:text="Highest Study"
                 android:textColor="#00BCD4"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
@@ -156,7 +156,7 @@ android:orientation="vertical"        android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:text="Designation"
+                android:text="Field of Study"
                 android:textColor="#00BCD4"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
@@ -195,6 +195,16 @@ android:orientation="vertical"        android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="@dimen/_14sdp"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/ViewUserResume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/orangeborder_whiteback"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="View Resume"/>
     </LinearLayout>
 
 

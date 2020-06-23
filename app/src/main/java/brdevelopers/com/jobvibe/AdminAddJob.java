@@ -22,10 +22,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class AdminAddJob extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -44,6 +53,7 @@ public class AdminAddJob extends Fragment implements View.OnClickListener, Adapt
     private String mParam1;
     private String mParam2;
 String jobId;
+String JobCategoryValue;
 String AdminPostedJobId;
     private OnFragmentInteractionListener mListener;
 
@@ -187,6 +197,9 @@ String AdminPostedJobId;
                         public void onSuccess(Void aVoid) {
                        //     Toast.makeText(getActivity(), "Job created successfully", Toast.LENGTH_SHORT).show();
 
+
+
+
                             addJobtoAdmin();
                         }
                     })
@@ -266,7 +279,37 @@ String AdminPostedJobId;
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        Toast.makeText(getActivity(), "Job Created Successfully", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Job Created Successfully", Toast.LENGTH_SHORT).show();
+
+                        Gson gson = new GsonBuilder().setLenient().create();
+                        OkHttpClient client = new OkHttpClient();
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl("https://jobvibe-63850.web.app/")
+                                .client(client)
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .build();
+                        ApiInterface service = retrofit.create(ApiInterface.class);
+                        Call<PushNotification> call = service.loginUser(InternValue);
+                        call.enqueue(new Callback<PushNotification>() {
+                            @Override
+                            public void onResponse(Call<PushNotification> call, Response<PushNotification> response) {
+
+                                if (response.body() != null && response.isSuccessful()) {
+
+                                    Toast.makeText(getActivity(), response.body().getStatus(), Toast.LENGTH_SHORT).show();
+
+                                }
+                                else
+                                {
+                                    Toast.makeText(getActivity(), "No Response from Server!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<PushNotification> call, Throwable t) {
+                                Toast.makeText(getActivity(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
                     }
                 })

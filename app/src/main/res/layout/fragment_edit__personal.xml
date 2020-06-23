@@ -78,7 +78,7 @@
                 android:textSize="@dimen/pofileET"
                 android:inputType="textCapWords"/>
 
-            <TextView
+          <!--  <TextView
                 android:id="@+id/TV_Experience"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
 
                 android:textSize="@dimen/pofileET"
                 android:inputType="number"
-                android:maxLength="6"/>
+                android:maxLength="6"/>-->
 
             <TextView
                 android:id="@+id/TV_pincode"
