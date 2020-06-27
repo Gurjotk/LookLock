@@ -186,6 +186,17 @@ public class Login extends AppCompatActivity implements TextWatcher, View.OnClic
 
                            // Toast.makeText(Login.this, "Successfully logged in as User", Toast.LENGTH_SHORT).show();
                              SaveLoginUser.user=user;
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("email", user.email);
+                            editor.putString("id", user.id);
+                            editor.putString("mobile", user.mobile);
+                            editor.putString("profileImage", user.profileImage);
+                            editor.putString("name", user.name);
+                            editor.putString("password", user.password);
+                            editor.putString("Resume", user.Resume);
+                            editor.putString("UserType", user.UserType);
+                            editor.apply();
                             Intent profile = new Intent(getApplicationContext(),Home.class);
                             startActivity(profile);
                             finish();

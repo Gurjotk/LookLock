@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ public class AdminPostedJob extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
-
+private ImageView refresh;
     ArrayList<EnityInternshipViewJob> enityInternshipViewJobArrayList;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,6 +74,46 @@ public class AdminPostedJob extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_posted_job, container, false);
+        refresh=(ImageView)view.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reloadPage();
+            }
+
+            private void reloadPage() {
+
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                databaseReference.child("Users").child(SaveLoginUser.user.id).child("PostedJobs").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //
+                        enityInternshipViewJobArrayList=new ArrayList<>();
+//                enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("React Developer","Kolkata","Now Mexian"));
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Model_View_Job user = snapshot.getValue(Model_View_Job.class);
+                            //   user.id = snapshot.getKey();
+                            Log.d("mytag", user.companyName);
+                            enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category,user.datetime,"SAVE","HIDEBOTH"));
+                        }
+
+                        //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));
+                        CustomAdapterInternshipViewJob customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,getActivity());
+                        recyclerView.setAdapter(customAdapter);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "Failed to load categories", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
         recyclerView=(RecyclerView)view.findViewById(R.id.RV_adminPostedJob);
         layoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

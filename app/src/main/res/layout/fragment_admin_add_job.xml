@@ -22,6 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="Type"/>
 
                 <Spinner
@@ -39,6 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="City"/>
                 <EditText
                     android:id="@+id/et_city"
@@ -63,6 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="Category"/>
 
                 <Spinner
@@ -79,6 +82,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
+                    android:textColor="#000"
                     android:layout_height="wrap_content"
                     android:text="Job Title"/>
                 <EditText
@@ -102,6 +106,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
+                    android:textColor="#000"
                     android:layout_height="wrap_content"
                     android:text="Designation"/>
                 <EditText
@@ -126,6 +131,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="Description"/>
                 <EditText
                     android:id="@+id/et_description"
@@ -149,6 +155,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="Salary"/>
                 <EditText
                     android:id="@+id/et_salary"
@@ -172,6 +179,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="CompanyName"/>
                 <EditText
                     android:id="@+id/et_companyName"
@@ -195,6 +203,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:text="Website"/>
                 <EditText
                     android:id="@+id/et_website"

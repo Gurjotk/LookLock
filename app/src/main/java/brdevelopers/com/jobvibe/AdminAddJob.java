@@ -248,6 +248,15 @@ String AdminPostedJobId;
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+
+                        city.setText("");
+                        jobTitle.setText("");
+
+                        designation.setText("");
+                        description.setText("");
+                        salary.setText("");
+                        companyName.setText("");
+                        website.setText("");
                         addPostedIdtoJob();
                        // Toast.makeText(getActivity(), "Job created successfully", Toast.LENGTH_SHORT).show();
 
@@ -302,6 +311,8 @@ String AdminPostedJobId;
                                 else
                                 {
                                     Toast.makeText(getActivity(), "No Response from Server!", Toast.LENGTH_SHORT).show();
+
+
                                 }
                             }
 

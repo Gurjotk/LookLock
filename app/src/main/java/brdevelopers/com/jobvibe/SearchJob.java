@@ -78,41 +78,10 @@ public class SearchJob extends AppCompatActivity {
                         }
 
                         if(flag.equals("false")){
-
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                            databaseReference.child("Jobs").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    //
-                                    enityInternshipViewJobArrayList=new ArrayList<>();
-//                enityInternshipViewJobArrayList.add(new EnityInternshipViewJob("React Developer","Kolkata","Now Mexian"));
-
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        for (DataSnapshot jobType : snapshot.getChildren()) {
-                                            for (DataSnapshot jobCategory : jobType.getChildren()) {
-                                                Model_View_Job user = jobCategory.getValue(Model_View_Job.class);
-                                                user.id = jobCategory.getKey();
-                                                Log.d("mytag", user.companyName);
-                                                enityInternshipViewJobArrayList.add(new EnityInternshipViewJob(user.jobTitle,user.city,user.companyName,user.id,user.type,user.category,user.datetime,"SAVE","SHOWBOTH"));
-
-
-                                            }
-                                        }
-
-                                    }
-
-                                    //  recyclerView.setAdapter(new CategoryAdapter(categories, HomeFragment.this));
-                                    customAdapter= new CustomAdapterInternshipViewJob(enityInternshipViewJobArrayList,SearchJob.this);
-                                    recyclerView.setAdapter(customAdapter);
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Toast.makeText(SearchJob.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            SearchArrayList.clear();
+                            customAdapter = new CustomAdapterInternshipViewJob(SearchArrayList, SearchJob.this);
+                            recyclerView.setAdapter(customAdapter);
+                            Toast.makeText(SearchJob.this, "Job Not Found", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{

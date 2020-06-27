@@ -305,11 +305,10 @@ public class Home extends AppCompatActivity
         }
         else if(id==R.id.nav_logout){
 
-            SharedPreferences sharedPreferences=getSharedPreferences("Data",MODE_PRIVATE);
-            SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putString("email","");
-            editor.putString("password","");
-            editor.commit();
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.apply();
 
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
